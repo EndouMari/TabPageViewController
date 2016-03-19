@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'TabPageViewController_Example', :exclusive => true do
+  pod 'TabPageViewController', :path => '../'
+end
+
+target 'TabPageViewController_Tests', :exclusive => true do
+  pod 'TabPageViewController', :path => '../'
+
+  
+end
