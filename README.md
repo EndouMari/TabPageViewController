@@ -5,11 +5,28 @@
 [![License](https://img.shields.io/cocoapods/l/TabPageViewController.svg?style=flat)](http://cocoapods.org/pods/TabPageViewController)
 [![Platform](https://img.shields.io/cocoapods/p/TabPageViewController.svg?style=flat)](http://cocoapods.org/pods/TabPageViewController)
 
+<img src="https://raw.githubusercontent.com/wiki/EndouMari/TabPageViewController/images/image1.png">
+
+
+## Description
+
+
+
+
+## Customization
+
+### 
+
+
+
+
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+`import TabPageViewController` to use TabPageViewController in your file.
 
 ## Requirements
+
+
 
 ## Installation
 
