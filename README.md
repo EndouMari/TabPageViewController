@@ -4,18 +4,30 @@
 [![License](https://img.shields.io/cocoapods/l/TabPageViewController.svg?style=flat)](http://cocoapods.org/pods/TabPageViewController)
 [![Platform](https://img.shields.io/cocoapods/p/TabPageViewController.svg?style=flat)](http://cocoapods.org/pods/TabPageViewController)
 
-<img src="https://raw.githubusercontent.com/wiki/EndouMari/TabPageViewController/images/image1.png">
+
+
 
 ## Description
 
-Limited Mode
+<img src="https://raw.githubusercontent.com/wiki/EndouMari/TabPageViewController/images/demo2.gif" width="300" align="right" hspace="20">
 
-<img src="https://raw.githubusercontent.com/wiki/EndouMari/TabPageViewController/images/demo1.gif">
 
+TabPageViewController is paging view controller and scroll tab view.
+
+**Screenshot**
 
 Infinity Mode
 
-<img src="https://raw.githubusercontent.com/wiki/EndouMari/TabPageViewController/images/demo2.gif">
+<img src="https://raw.githubusercontent.com/wiki/EndouMari/TabPageViewController/images/ScreenShot2.png" height="300">
+
+
+Limited Mode
+
+<img src="https://raw.githubusercontent.com/wiki/EndouMari/TabPageViewController/images/ScreenShot1.png" height="300">
+
+
+
+<br clear="right">
 
 ## Customization
 
@@ -61,7 +73,6 @@ Use TabPageOption
 ### Example 
 
 ```swift
-
 let tabPageViewController = TabPageViewController.create()
 let vc1 = UIViewController()
 let vc2 = UIViewController()
@@ -70,6 +81,13 @@ tabPageViewController.tabItems = [(vc1, "First"), (vc2, "Second")]
 
 TabPageOption.currentColor = UIColor.redColor()
 
+```
+
+Infinity Mode 
+
+```swift
+let tabPageViewController = TabPageViewController.create()
+tabPageViewController.isInfinity = true
 ```
 
 
