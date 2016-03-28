@@ -10,7 +10,6 @@ import UIKit
 
 internal class TabView: UIView {
 
-    var isInfinity: Bool = false
     var pageItemPressedBlock: ((index: Int, direction: UIPageViewControllerNavigationDirection) -> Void)?
     var pageTabItems: [String] = [] {
         didSet {
@@ -19,6 +18,8 @@ internal class TabView: UIView {
         }
     }
 
+    private var isInfinity: Bool = false
+    private var option: TabPageOption = TabPageOption()
     private var beforeIndex: Int = 0
     private var currentIndex: Int = 0
     private var pageTabItemsCount: Int = 0
@@ -36,12 +37,13 @@ internal class TabView: UIView {
     @IBOutlet private weak var currentBarViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet private weak var bottomBarViewHeightConstraint: NSLayoutConstraint!
 
-    init(isInfinity: Bool) {
+    init(isInfinity: Bool, option: TabPageOption) {
        super.init(frame: CGRectZero)
+        self.option = option
         self.isInfinity = isInfinity
         NSBundle(forClass: TabView.self).loadNibNamed("TabView", owner: self, options: nil)
         addSubview(contentView)
-        contentView.backgroundColor = TabPageOption.tabBackgroundColor
+        contentView.backgroundColor = option.tabBackgroundColor
 
         let top = NSLayoutConstraint(item: contentView,
             attribute: .Top,
@@ -85,7 +87,7 @@ internal class TabView: UIView {
 
         collectionView.scrollsToTop = false
 
-        currentBarView.backgroundColor = TabPageOption.currentColor
+        currentBarView.backgroundColor = option.currentColor
         if !isInfinity {
             currentBarView.removeFromSuperview()
             collectionView.addSubview(currentBarView)
@@ -96,7 +98,7 @@ internal class TabView: UIView {
                 toItem: collectionView,
                 attribute: .Top,
                 multiplier: 1.0,
-                constant: TabPageOption.tabHeight - currentBarView.frame.height)
+                constant: option.tabHeight - currentBarView.frame.height)
 
             let left = NSLayoutConstraint(item: currentBarView,
                 attribute: .Leading,
@@ -123,18 +125,18 @@ internal class TabView: UIView {
 extension TabView {
 
     /**
-     isInfinityTabPageViewControllerでスワイプしている時にに呼ばれる、collectionViewのcontentOffsetを動かす処理
+     Called when you swipe in isInfinityTabPageViewController, moves the contentOffset of collectionView
 
-     - parameter index: CurrentにしたいIndex
-     - parameter contentOffsetX: isInfinityTabPageViewControllerのscrollViewのcontentOffset.x
+     - parameter index: Next Index
+     - parameter contentOffsetX: contentOffset.x of scrollView of isInfinityTabPageViewController
      */
     func scrollCurrentBarView(index: Int, contentOffsetX: CGFloat) {
         var nextIndex = isInfinity ? index + pageTabItemsCount : index
         if isInfinity && index == 0 && (beforeIndex - pageTabItemsCount) == pageTabItemsCount - 1 {
-            // pageTabItemsの最後のアイテムから一番目のアイテムに遷移するときのindexを計算
+            // Calculate the index at the time of transition to the first item from the last item of pageTabItems
             nextIndex = pageTabItemsCount * 2
         } else if isInfinity && (index == pageTabItemsCount - 1) && (beforeIndex - pageTabItemsCount) == 0 {
-            // pageTabItemsの一番目のアイテムから最後のアイテムに遷移するときのindexを計算
+            // Calculate the index at the time of transition from the first item of pageTabItems to the last item
             nextIndex = pageTabItemsCount - 1
         }
 
@@ -180,7 +182,7 @@ extension TabView {
     }
 
     /**
-     スワイプでページを切り替えるときに現在のCurrentのCellを中央に移動させる処理
+     Center the current cell after page swipe
      */
     func scrollToHorizontalCenter() {
         let indexPath = NSIndexPath(forItem: currentIndex, inSection: 0)
@@ -189,9 +191,9 @@ extension TabView {
     }
 
     /**
-     Currentの更新処理でisInfinityTabPageViewControllerでページの遷移完了後に呼ばれる
+     Called in after the transition is complete pages in isInfinityTabPageViewController in the process of updating the current
 
-     - parameter index: CurrentにしたいIndex
+     - parameter index: Next Index
      */
     func updateCurrentIndex(index: Int) {
         deselectVisibleCells()
@@ -203,9 +205,9 @@ extension TabView {
     }
 
     /**
-     isInfinityTabCollectionCellをタップした時にCurrentを更新する処理
+     Make the tapped cell the current if isInfinity is true
 
-     - parameter index: CurrentにしたいIndexを渡す
+     - parameter index: Next IndexPath
      */
     private func updateCurrentIndexForTap(index: Int) {
         deselectVisibleCells()
@@ -221,10 +223,10 @@ extension TabView {
     }
 
     /**
-     collectionViewをCurrentのIndexPathに移動させる処理
+     Move the collectionView to IndexPath of Current
 
-     - parameter indexPath: CurrentにしたいIndexPathを渡す
-     - parameter animated: isInfinityTabCollectionCellをタップして移動させるときはtrue
+     - parameter indexPath: Next IndexPath
+     - parameter animated: true when you tap to move the isInfinityTabCollectionCell
      */
     private func moveCurrentBarView(indexPath: NSIndexPath, animated: Bool) {
         collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
@@ -250,7 +252,7 @@ extension TabView {
     }
 
     /**
-     collectionViewのタッチイベント制御
+     Touch event control of collectionView
 
      - parameter userInteractionEnabled: collectionViewに渡すuserInteractionEnabled
      */
@@ -259,7 +261,7 @@ extension TabView {
     }
 
     /**
-     表示中のすべてのセルを未選択状態にする
+     Update all of the cells in the display to the unselected state
      */
     private func deselectVisibleCells() {
         collectionView
@@ -287,6 +289,7 @@ extension TabView: UICollectionViewDataSource {
     private func configureCell(cell: TabCollectionCell, indexPath: NSIndexPath) {
         let fixedIndex = isInfinity ? indexPath.item % pageTabItemsCount : indexPath.item
         cell.item = pageTabItems[fixedIndex]
+        cell.option = option
         cell.isCurrent = fixedIndex == (currentIndex % pageTabItemsCount)
         cell.tabItemButtonPressedBlock = { [weak self, weak cell] in
             var direction: UIPageViewControllerNavigationDirection = .Forward
@@ -304,7 +307,7 @@ extension TabView: UICollectionViewDataSource {
             self?.pageItemPressedBlock?(index: fixedIndex, direction: direction)
 
             if cell?.isCurrent == false {
-                // スクロールのアニメーションが終わるまでタッチイベントを受け付けない
+                // Not accept touch events to scroll the animation is finished
                 self?.updateCollectionViewUserInteractionEnabled(false)
             }
             self?.updateCurrentIndexForTap(indexPath.item)
@@ -341,7 +344,7 @@ extension TabView: UICollectionViewDelegate {
     }
 
     internal func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        // アニメーションが完了したのでタッチイベントを受け付ける
+        // Accept the touch event because animation is complete
         updateCollectionViewUserInteractionEnabled(true)
 
         guard isInfinity else {
@@ -350,7 +353,7 @@ extension TabView: UICollectionViewDelegate {
 
         let indexPath = NSIndexPath(forItem: currentIndex, inSection: 0)
         if shouldScrollToItem {
-            // 違和感がないように動かしたあと、contentOffsetをcurrentIndexのところに調整する
+            // After the moved so as not to sense of incongruity, to adjust the contentOffset at the currentIndex
             collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: false)
             shouldScrollToItem = false
         }
@@ -370,7 +373,7 @@ extension TabView: UICollectionViewDelegateFlowLayout {
 
         configureCell(cellForSize, indexPath: indexPath)
 
-        let size = cellForSize.sizeThatFits(CGSizeMake(collectionView.bounds.width, TabPageOption.tabHeight))
+        let size = cellForSize.sizeThatFits(CGSizeMake(collectionView.bounds.width, option.tabHeight))
         cachedCellSizes[indexPath] = size
 
         return size

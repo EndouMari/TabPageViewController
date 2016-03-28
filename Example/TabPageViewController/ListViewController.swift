@@ -13,9 +13,8 @@ class ListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         let navigationHeight = navigationController?.navigationBar.frame.maxY ?? 0.0
-        tableView.contentInset.top = navigationHeight + TabPageOption.tabHeight
+        tableView.contentInset.top = navigationHeight + TabPageOption().tabHeight
     }
 
 }

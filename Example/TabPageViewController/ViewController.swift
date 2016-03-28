@@ -27,6 +27,9 @@ class ViewController: UIViewController {
         vc1.view.backgroundColor = UIColor.whiteColor()
         let vc2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ListViewController")
         tc.tabItems = [(vc1, "First"), (vc2, "Second")]
+        var option = TabPageOption()
+        option.tabWidth = view.frame.width / CGFloat(tc.tabItems.count)
+        tc.option = option
         navigationController?.pushViewController(tc, animated: true)
     }
 
@@ -42,8 +45,13 @@ class ViewController: UIViewController {
         vc4.view.backgroundColor = UIColor(red: 149/255, green: 252/255, blue: 197/255, alpha: 1.0)
         let vc5 = UIViewController()
         vc5.view.backgroundColor = UIColor(red: 252/255, green: 182/255, blue: 106/255, alpha: 1.0)
-        tc.tabItems = [(vc1, "月曜日"), (vc2, "火曜日"), (vc3, "水曜日"), (vc4, "木曜日"), (vc5, "金曜日")]
+        tc.tabItems = [(vc1, "Mon."), (vc2, "Tue."), (vc3, "Wed."), (vc4, "Thu."), (vc5, "Fri.")]
         tc.isInfinity = true
+        let nc = UINavigationController()
+        nc.viewControllers = [tc]
+        var option = TabPageOption()
+        option.currentColor = UIColor(red: 246/255, green: 175/255, blue: 32/255, alpha: 1.0)
+        tc.option = option
         navigationController?.pushViewController(tc, animated: true)
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 class TabCollectionCell: UICollectionViewCell {
 
     var tabItemButtonPressedBlock: (Void -> Void)?
+    var option: TabPageOption = TabPageOption()
     var item: String = "" {
         didSet {
             itemLabel.text = item
@@ -26,6 +27,7 @@ class TabCollectionCell: UICollectionViewCell {
             } else {
                 unHighlightTitle()
             }
+            currentBarView.backgroundColor = option.currentColor
             layoutIfNeeded()
         }
     }
@@ -37,7 +39,6 @@ class TabCollectionCell: UICollectionViewCell {
         super.awakeFromNib()
 
         currentBarView.hidden = true
-        currentBarView.backgroundColor = TabPageOption.currentColor
     }
 
     override func sizeThatFits(size: CGSize) -> CGSize {
@@ -58,9 +59,14 @@ class TabCollectionCell: UICollectionViewCell {
 
 extension TabCollectionCell {
     override func intrinsicContentSize() -> CGSize {
-        var width = itemLabel.intrinsicContentSize().width
-        width += TabPageOption.tabMargin * 2
-        let size = CGSizeMake(width, TabPageOption.tabHeight)
+        let width: CGFloat
+        if let tabWidth = option.tabWidth where tabWidth > 0.0 {
+            width = tabWidth
+        } else {
+            width = itemLabel.intrinsicContentSize().width + option.tabMargin * 2
+        }
+
+        let size = CGSizeMake(width, option.tabHeight)
         return size
     }
 
@@ -73,13 +79,13 @@ extension TabCollectionCell {
     }
 
     func highlightTitle() {
-        itemLabel.textColor = TabPageOption.currentColor
-        itemLabel.font = UIFont.boldSystemFontOfSize(TabPageOption.fontSize)
+        itemLabel.textColor = option.currentColor
+        itemLabel.font = UIFont.boldSystemFontOfSize(option.fontSize)
     }
 
     func unHighlightTitle() {
-        itemLabel.textColor = TabPageOption.defaultColor
-        itemLabel.font = UIFont.systemFontOfSize(TabPageOption.fontSize)
+        itemLabel.textColor = option.defaultColor
+        itemLabel.font = UIFont.systemFontOfSize(option.fontSize)
     }
 }
 

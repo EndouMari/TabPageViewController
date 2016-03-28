@@ -10,6 +10,7 @@ import UIKit
 
 public class TabPageViewController: UIPageViewController {
     public var isInfinity: Bool = false
+    public var option: TabPageOption = TabPageOption()
     public var tabItems: [(viewController: UIViewController, title: String)] = [] {
         didSet {
             tabItemsCount = tabItems.count
@@ -108,26 +109,26 @@ extension TabPageViewController {
     }
 
     private func setupScrollView() {
-        // PageViewControllerのScrollViewのbouncesを無効にする
+        // Disable PageViewController's ScrollView bounce
         let scrollView = view.subviews.flatMap { $0 as? UIScrollView }.first
         scrollView?.scrollsToTop = false
         scrollView?.delegate = self
-        scrollView?.backgroundColor = TabPageOption.pageBackgoundColor
+        scrollView?.backgroundColor = option.pageBackgoundColor
     }
 
     /**
-     NavigationBarの線を消して背景に色を付ける
+     Update NavigationBar
      */
 
     private func updateNavigationBar() {
         if let navigationBar = navigationController?.navigationBar {
             navigationBar.shadowImage = UIImage()
-            navigationBar.setBackgroundImage(TabPageOption.tabBackgroundImage, forBarMetrics: .Default)
+            navigationBar.setBackgroundImage(option.tabBackgroundImage, forBarMetrics: .Default)
         }
     }
 
     private func configuredTabView() -> TabView {
-        let tabView = TabView(isInfinity: isInfinity)
+        let tabView = TabView(isInfinity: isInfinity, option: option)
         tabView.translatesAutoresizingMaskIntoConstraints = false
 
         let height = NSLayoutConstraint(item: tabView,
@@ -136,7 +137,7 @@ extension TabPageViewController {
             toItem: nil,
             attribute: .Height,
             multiplier: 1.0,
-            constant: TabPageOption.tabHeight)
+            constant: option.tabHeight)
         tabView.addConstraint(height)
         view.addSubview(tabView)
 
@@ -226,7 +227,7 @@ extension TabPageViewController: UIPageViewControllerDelegate {
         shouldScrollCurrentBar = true
         tabView.scrollToHorizontalCenter()
 
-        // ページ遷移が完了するまでタブをタップ不可にする
+        // Order to prevent the the hit repeatedly during animation
         tabView.updateCollectionViewUserInteractionEnabled(false)
     }
 
@@ -236,7 +237,6 @@ extension TabPageViewController: UIPageViewControllerDelegate {
             beforeIndex = currentIndex
         }
 
-        // ページ遷移が完了したのでタブをタップ可能にする
         tabView.updateCollectionViewUserInteractionEnabled(true)
     }
 }
@@ -251,7 +251,7 @@ extension TabPageViewController: UIScrollViewDelegate {
             return
         }
 
-        // 次に移動するIndexを計算(0..<tabItemsCount)
+        // (0..<tabItemsCount)
         var index: Int
         if scrollView.contentOffset.x > defaultContentOffsetX {
             index = beforeIndex + 1
