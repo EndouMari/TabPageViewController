@@ -190,9 +190,9 @@ extension TabPageViewController: UIPageViewControllerDataSource {
         }
 
         if isAfter {
-            index++
+            index += 1
         } else {
-            index--
+            index -= 1
         }
 
         if isInfinity {
