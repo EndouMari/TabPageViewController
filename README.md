@@ -102,6 +102,7 @@ iOS8+
 ### Using CocoaPods
 
 ```ruby
+use_frameworks!
 pod "TabPageViewController"
 ```
 
