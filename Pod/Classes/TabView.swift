@@ -195,19 +195,19 @@ extension TabView {
 
      - parameter index: Next Index
      */
-    func updateCurrentIndex(index: Int) {
+    func updateCurrentIndex(index: Int, shouldScroll: Bool) {
         deselectVisibleCells()
 
         currentIndex = isInfinity ? index + pageTabItemsCount : index
 
         let indexPath = NSIndexPath(forItem: currentIndex, inSection: 0)
-        moveCurrentBarView(indexPath, animated: !isInfinity)
+        moveCurrentBarView(indexPath, animated: !isInfinity, shouldScroll: shouldScroll)
     }
 
     /**
      Make the tapped cell the current if isInfinity is true
 
-     - parameter index: Next IndexPath
+     - parameter index: Next IndexPath√
      */
     private func updateCurrentIndexForTap(index: Int) {
         deselectVisibleCells()
@@ -219,7 +219,7 @@ extension TabView {
             currentIndex = index
         }
         let indexPath = NSIndexPath(forItem: index, inSection: 0)
-        moveCurrentBarView(indexPath, animated: true)
+        moveCurrentBarView(indexPath, animated: true, shouldScroll: true)
     }
 
     /**
@@ -227,15 +227,18 @@ extension TabView {
 
      - parameter indexPath: Next IndexPath
      - parameter animated: true when you tap to move the isInfinityTabCollectionCell
+     - parameter shouldScroll:
      */
-    private func moveCurrentBarView(indexPath: NSIndexPath, animated: Bool) {
-        collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
-        layoutIfNeeded()
-        collectionViewContentOffsetX = 0.0
-        currentBarViewWidth = 0.0
+    private func moveCurrentBarView(indexPath: NSIndexPath, animated: Bool, shouldScroll: Bool) {
+        if shouldScroll {
+            collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: animated)
+            layoutIfNeeded()
+            collectionViewContentOffsetX = 0.0
+            currentBarViewWidth = 0.0
+        }
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? TabCollectionCell {
             currentBarView.hidden = false
-            if animated {
+            if animated && shouldScroll {
                 cell.isCurrent = true
             }
             cell.hideCurrentBarView()
@@ -246,7 +249,7 @@ extension TabView {
             UIView.animateWithDuration(0.2, animations: {
                 self.layoutIfNeeded()
                 }, completion: { _ in
-                    if !animated {
+                    if !animated && shouldScroll {
                         cell.isCurrent = true
                     }
                     if !self.isInfinity {
