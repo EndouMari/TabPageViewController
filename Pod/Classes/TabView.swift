@@ -235,18 +235,24 @@ extension TabView {
         currentBarViewWidth = 0.0
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? TabCollectionCell {
             currentBarView.hidden = false
-            cell.isCurrent = true
+            if animated {
+                cell.isCurrent = true
+            }
             cell.hideCurrentBarView()
             currentBarViewWidthConstraint.constant = cell.frame.width
             if !isInfinity {
                 currentBarViewLeftConstraint?.constant = cell.frame.origin.x
             }
-            UIView.animateWithDuration(0.2) {
+            UIView.animateWithDuration(0.2, animations: {
                 self.layoutIfNeeded()
-                if !self.isInfinity {
-                    self.updateCollectionViewUserInteractionEnabled(true)
-                }
-            }
+                }, completion: { _ in
+                    if !animated {
+                        cell.isCurrent = true
+                    }
+                    if !self.isInfinity {
+                        self.updateCollectionViewUserInteractionEnabled(true)
+                    }
+            })
         }
         beforeIndex = currentIndex
     }
