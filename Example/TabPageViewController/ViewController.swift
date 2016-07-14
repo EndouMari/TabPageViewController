@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         vc1.view.backgroundColor = UIColor.whiteColor()
         let vc2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ListViewController")
         tc.tabItems = [(vc1, "First"), (vc2, "Second")]
+        tc.displayControllerWithIndex(1, direction: .Forward, animated: false)
         var option = TabPageOption()
         option.tabWidth = view.frame.width / CGFloat(tc.tabItems.count)
         tc.option = option

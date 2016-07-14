@@ -17,7 +17,7 @@ public class TabPageViewController: UIPageViewController {
         }
     }
 
-    private var currentIndex: Int? {
+    var currentIndex: Int? {
         guard let viewController = viewControllers?.first else {
             return nil
         }
@@ -71,9 +71,9 @@ public class TabPageViewController: UIPageViewController {
 
 // MARK: - Public Interface
 
-extension TabPageViewController {
+public extension TabPageViewController {
 
-    func displayControllerWithIndex(index: Int, direction: UIPageViewControllerNavigationDirection, animated: Bool) {
+    public func displayControllerWithIndex(index: Int, direction: UIPageViewControllerNavigationDirection, animated: Bool) {
 
         beforeIndex = index
         shouldScrollCurrentBar = false
