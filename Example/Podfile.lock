@@ -1,5 +1,5 @@
 PODS:
-  - TabPageViewController (0.1.1)
+  - TabPageViewController (0.2.0)
 
 DEPENDENCIES:
   - TabPageViewController (from `../`)
@@ -9,6 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  TabPageViewController: 10fa70daf5d743127cadfd9ef9b3c1354a54c57c
+  TabPageViewController: bbf6e2a15bfbd7ccfc269daf182d9d0e8815ba13
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 60124acb3a376c7ec56c5de0c6203ae90b0f48f5
+
+COCOAPODS: 1.0.1
