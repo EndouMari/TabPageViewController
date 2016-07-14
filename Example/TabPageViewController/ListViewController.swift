@@ -10,13 +10,13 @@ import UIKit
 import TabPageViewController
 
 class ListViewController: UITableViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        let navigationHeight = navigationController?.navigationBar.frame.maxY ?? 0.0
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        let navigationHeight = topLayoutGuide.length ?? 0.0
         tableView.contentInset.top = navigationHeight + TabPageOption().tabHeight
     }
-
 }
 
 

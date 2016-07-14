@@ -17,7 +17,7 @@ public class TabPageViewController: UIPageViewController {
         }
     }
 
-    private var currentIndex: Int? {
+    var currentIndex: Int? {
         guard let viewController = viewControllers?.first else {
             return nil
         }
@@ -52,7 +52,7 @@ public class TabPageViewController: UIPageViewController {
         }
 
         if let currentIndex = currentIndex where isInfinity {
-            tabView.updateCurrentIndex(currentIndex)
+            tabView.updateCurrentIndex(currentIndex, shouldScroll: true)
         }
     }
 
@@ -73,9 +73,9 @@ public class TabPageViewController: UIPageViewController {
 
 // MARK: - Public Interface
 
-extension TabPageViewController {
+public extension TabPageViewController {
 
-    func displayControllerWithIndex(index: Int, direction: UIPageViewControllerNavigationDirection, animated: Bool) {
+    public func displayControllerWithIndex(index: Int, direction: UIPageViewControllerNavigationDirection, animated: Bool) {
 
         beforeIndex = index
         shouldScrollCurrentBar = false
@@ -170,7 +170,7 @@ extension TabPageViewController {
         view.addConstraints([top, left, right])
 
         tabView.pageTabItems = tabItems.map({ $0.title})
-        tabView.updateCurrentIndex(beforeIndex)
+        tabView.updateCurrentIndex(beforeIndex, shouldScroll: true)
 
         tabView.pageItemPressedBlock = { [weak self] (index: Int, direction: UIPageViewControllerNavigationDirection) in
             self?.displayControllerWithIndex(index, direction: direction, animated: true)
@@ -235,7 +235,7 @@ extension TabPageViewController: UIPageViewControllerDelegate {
 
     public func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if let currentIndex = currentIndex where currentIndex < tabItemsCount {
-            tabView.updateCurrentIndex(currentIndex)
+            tabView.updateCurrentIndex(currentIndex, shouldScroll: false)
             beforeIndex = currentIndex
         }
 
@@ -269,5 +269,9 @@ extension TabPageViewController: UIScrollViewDelegate {
 
         let scrollOffsetX = scrollView.contentOffset.x - view.frame.width
         tabView.scrollCurrentBarView(index, contentOffsetX: scrollOffsetX)
+    }
+
+    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        tabView.updateCurrentIndex(beforeIndex, shouldScroll: true)
     }
 }
