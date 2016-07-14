@@ -1,5 +1,5 @@
 framework module TabPageViewController {
-  umbrella header "TabPageViewController-umbrella.h"
+  umbrella header "TabPageViewController-iOS8.0-umbrella.h"
 
   export *
   module * { export * }
