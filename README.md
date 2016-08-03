@@ -112,6 +112,10 @@ pod "TabPageViewController"
 github "EndouMari/TabPageViewController"
 
 ```
+### Manually
+Copy all the files in `Pod/Classes` directory into your project.
+
+
 
 ## Author
 
