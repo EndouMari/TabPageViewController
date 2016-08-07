@@ -1,3 +1,9 @@
+# 0.2.1 Release notes (2016-08-07)
+
+## Enhancements
+
+* fix carthage
+
 # 0.2.0 Release notes (2016-07-14)
 
 ## Enhancements
