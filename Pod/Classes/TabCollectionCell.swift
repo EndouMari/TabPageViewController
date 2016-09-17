@@ -10,7 +10,7 @@ import UIKit
 
 class TabCollectionCell: UICollectionViewCell {
 
-    var tabItemButtonPressedBlock: (Void -> Void)?
+    var tabItemButtonPressedBlock: ((Void) -> Void)?
     var option: TabPageOption = TabPageOption()
     var item: String = "" {
         didSet {
@@ -21,7 +21,7 @@ class TabCollectionCell: UICollectionViewCell {
     }
     var isCurrent: Bool = false {
         didSet {
-            currentBarView.hidden = !isCurrent
+            currentBarView.isHidden = !isCurrent
             if isCurrent {
                 highlightTitle()
             } else {
@@ -32,21 +32,21 @@ class TabCollectionCell: UICollectionViewCell {
         }
     }
 
-    @IBOutlet private weak var itemLabel: UILabel!
-    @IBOutlet private weak var currentBarView: UIView!
+    @IBOutlet fileprivate weak var itemLabel: UILabel!
+    @IBOutlet fileprivate weak var currentBarView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        currentBarView.hidden = true
+        currentBarView.isHidden = true
     }
 
-    override func sizeThatFits(size: CGSize) -> CGSize {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
         if item.characters.count == 0 {
-            return CGSizeZero
+            return CGSize.zero
         }
 
-        return intrinsicContentSize()
+        return intrinsicContentSize
     }
 
     class func cellIdentifier() -> String {
@@ -58,34 +58,34 @@ class TabCollectionCell: UICollectionViewCell {
 // MARK: - View
 
 extension TabCollectionCell {
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize : CGSize {
         let width: CGFloat
-        if let tabWidth = option.tabWidth where tabWidth > 0.0 {
+        if let tabWidth = option.tabWidth , tabWidth > 0.0 {
             width = tabWidth
         } else {
-            width = itemLabel.intrinsicContentSize().width + option.tabMargin * 2
+            width = itemLabel.intrinsicContentSize.width + option.tabMargin * 2
         }
 
-        let size = CGSizeMake(width, option.tabHeight)
+        let size = CGSize(width: width, height: option.tabHeight)
         return size
     }
 
     func hideCurrentBarView() {
-        currentBarView.hidden = true
+        currentBarView.isHidden = true
     }
 
     func showCurrentBarView() {
-        currentBarView.hidden = false
+        currentBarView.isHidden = false
     }
 
     func highlightTitle() {
         itemLabel.textColor = option.currentColor
-        itemLabel.font = UIFont.boldSystemFontOfSize(option.fontSize)
+        itemLabel.font = UIFont.boldSystemFont(ofSize: option.fontSize)
     }
 
     func unHighlightTitle() {
         itemLabel.textColor = option.defaultColor
-        itemLabel.font = UIFont.systemFontOfSize(option.fontSize)
+        itemLabel.font = UIFont.systemFont(ofSize: option.fontSize)
     }
 }
 
@@ -93,7 +93,7 @@ extension TabCollectionCell {
 // MARK: - IBAction
 
 extension TabCollectionCell {
-    @IBAction private func tabItemTouchUpInside(button: UIButton) {
+    @IBAction fileprivate func tabItemTouchUpInside(_ button: UIButton) {
         tabItemButtonPressedBlock?()
     }
 }
