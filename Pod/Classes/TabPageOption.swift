@@ -29,9 +29,9 @@ public struct TabPageOption {
         let rect : CGRect = CGRectMake(0, 0, 1, 1)
         UIGraphicsBeginImageContext(rect.size)
         let context : CGContextRef? = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context, tabBackgroundColor.CGColor)
-        CGContextFillRect(context, rect)
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        CGContextSetFillColorWithColor(context!, tabBackgroundColor.CGColor)
+        CGContextFillRect(context!, rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }
