@@ -21,11 +21,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func LimitedButton(button: UIButton) {
+    @IBAction func LimitedButton(_ button: UIButton) {
         let tc = TabPageViewController.create()
         let vc1 = UIViewController()
-        vc1.view.backgroundColor = UIColor.whiteColor()
-        let vc2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ListViewController")
+        vc1.view.backgroundColor = UIColor.white
+        let vc2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ListViewController")
         tc.tabItems = [(vc1, "First"), (vc2, "Second")]
         var option = TabPageOption()
         option.tabWidth = view.frame.width / CGFloat(tc.tabItems.count)
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(tc, animated: true)
     }
 
-    @IBAction func InfinityButton(button: UIButton) {
+    @IBAction func InfinityButton(_ button: UIButton) {
         let tc = TabPageViewController.create()
         let vc1 = UIViewController()
         vc1.view.backgroundColor = UIColor(red: 251/255, green: 252/255, blue: 149/255, alpha: 1.0)

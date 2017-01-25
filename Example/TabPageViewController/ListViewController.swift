@@ -14,7 +14,7 @@ class ListViewController: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        let navigationHeight = topLayoutGuide.length ?? 0.0
+        let navigationHeight = topLayoutGuide.length 
         tableView.contentInset.top = navigationHeight + TabPageOption().tabHeight
     }
 }
@@ -23,13 +23,13 @@ class ListViewController: UITableViewController {
 // MARK: - UITableViewDataSource
 
 extension ListViewController {
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = String(indexPath.row)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+        cell.textLabel?.text = String((indexPath as NSIndexPath).row)
         return cell
     }
 }
