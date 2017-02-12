@@ -60,6 +60,7 @@ open class TabPageViewController: UIPageViewController {
         super.viewDidAppear(animated)
 
         updateNavigationBar()
+        tabView.layouted = true
     }
 
     override open func viewWillDisappear(_ animated: Bool) {

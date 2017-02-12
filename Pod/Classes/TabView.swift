@@ -17,6 +17,7 @@ internal class TabView: UIView {
             beforeIndex = pageTabItems.count
         }
     }
+    var layouted: Bool = false
 
     fileprivate var isInfinity: Bool = false
     fileprivate var option: TabPageOption = TabPageOption()
@@ -296,7 +297,7 @@ extension TabView: UICollectionViewDataSource {
     }
 
     fileprivate func configureCell(_ cell: TabCollectionCell, indexPath: IndexPath) {
-        let fixedIndex = isInfinity ? (indexPath as NSIndexPath).item % pageTabItemsCount : (indexPath as NSIndexPath).item
+        let fixedIndex = isInfinity ? indexPath.item % pageTabItemsCount : indexPath.item
         cell.item = pageTabItems[fixedIndex]
         cell.option = option
         cell.isCurrent = fixedIndex == (currentIndex % pageTabItemsCount)
@@ -304,11 +305,11 @@ extension TabView: UICollectionViewDataSource {
             var direction: UIPageViewControllerNavigationDirection = .forward
             if let pageTabItemsCount = self?.pageTabItemsCount, let currentIndex = self?.currentIndex {
                 if self?.isInfinity == true {
-                    if ((indexPath as NSIndexPath).item < pageTabItemsCount) || ((indexPath as NSIndexPath).item < currentIndex) {
+                    if (indexPath.item < pageTabItemsCount) || (indexPath.item < currentIndex) {
                         direction = .reverse
                     }
                 } else {
-                    if (indexPath as NSIndexPath).item < currentIndex {
+                    if indexPath.item < currentIndex {
                         direction = .reverse
                     }
                 }
@@ -319,7 +320,15 @@ extension TabView: UICollectionViewDataSource {
                 // Not accept touch events to scroll the animation is finished
                 self?.updateCollectionViewUserInteractionEnabled(false)
             }
-            self?.updateCurrentIndexForTap((indexPath as NSIndexPath).item)
+            self?.updateCurrentIndexForTap(indexPath.item)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // FIXME: Tabs are not displayed when processing is performed during introduction display
+        if let cell = cell as? TabCollectionCell, isInfinity && layouted {
+            let fixedIndex = isInfinity ? indexPath.item % pageTabItemsCount : indexPath.item
+            cell.isCurrent = fixedIndex == (currentIndex % pageTabItemsCount)
         }
     }
 }
