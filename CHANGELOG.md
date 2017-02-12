@@ -1,3 +1,9 @@
+# 0.2.2 Release notes (2017-02-13)
+
+## Enhancements
+
+* fix current tab
+
 # 0.2.1 Release notes (2016-08-07)
 
 ## Enhancements

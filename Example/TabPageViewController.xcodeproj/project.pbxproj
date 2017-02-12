@@ -213,7 +213,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
@@ -499,7 +499,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 11210361CF2AEF64DF5EF5C5 /* Pods-TabPageViewController_Example.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TabPageViewController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -515,7 +514,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F9A820C7198AE00EDA215606 /* Pods-TabPageViewController_Example.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TabPageViewController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -531,7 +529,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C17EDC63008D44833EB47C92 /* Pods-TabPageViewController_Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -551,7 +548,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 288B4989E5E4E1C3E04370FE /* Pods-TabPageViewController_Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;

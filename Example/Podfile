@@ -7,6 +7,4 @@ end
 
 target 'TabPageViewController_Tests' do
   pod 'TabPageViewController', :path => '../'
-
-  
 end
