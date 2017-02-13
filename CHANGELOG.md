@@ -1,3 +1,9 @@
+# 0.2.3 Release notes (2017-02-13)
+
+## Enhancements
+
+* fix current tab for limited mode
+
 # 0.2.2 Release notes (2017-02-13)
 
 ## Enhancements
