@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "9999"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CFF26AE1D55CC82007DD9EC"
+               BlueprintIdentifier = "OBJ_16"
                BuildableName = "TabPageViewController.framework"
                BlueprintName = "TabPageViewController"
                ReferencedContainer = "container:TabPageViewController.xcodeproj">
@@ -32,22 +32,13 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4CFF26B81D55CC82007DD9EC"
+               BlueprintIdentifier = "OBJ_23"
                BuildableName = "TabPageViewControllerTests.xctest"
                BlueprintName = "TabPageViewControllerTests"
                ReferencedContainer = "container:TabPageViewController.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4CFF26AE1D55CC82007DD9EC"
-            BuildableName = "TabPageViewController.framework"
-            BlueprintName = "TabPageViewController"
-            ReferencedContainer = "container:TabPageViewController.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,7 +55,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4CFF26AE1D55CC82007DD9EC"
+            BlueprintIdentifier = "OBJ_16"
             BuildableName = "TabPageViewController.framework"
             BlueprintName = "TabPageViewController"
             ReferencedContainer = "container:TabPageViewController.xcodeproj">
@@ -79,15 +70,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4CFF26AE1D55CC82007DD9EC"
-            BuildableName = "TabPageViewController.framework"
-            BlueprintName = "TabPageViewController"
-            ReferencedContainer = "container:TabPageViewController.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

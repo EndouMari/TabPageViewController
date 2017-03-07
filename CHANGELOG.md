@@ -1,3 +1,9 @@
+# 0.2.4 Release notes (2017-03-07)
+
+## Enhancements
+
+* fix directory
+
 # 0.2.3 Release notes (2017-02-13)
 
 ## Enhancements
