@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Sources/*.swift'
   s.resource = 'Sources/*.{xib,storyboard}'
 
-  s.public_header_files = 'Sources/*.h'
+  #s.public_header_files = 'Sources/*.h'
   s.frameworks = 'UIKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
