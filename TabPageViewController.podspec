@@ -28,10 +28,10 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/*.swift'
-  s.resource = 'Pod/Classes/*.{xib,storyboard}'
+  s.source_files = 'Sources/*.swift'
+  s.resource = 'Sources/*.{xib,storyboard}'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
+  s.public_header_files = 'Sources/*.h'
   s.frameworks = 'UIKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
