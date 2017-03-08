@@ -92,6 +92,9 @@ public extension TabPageViewController {
             direction: direction,
             animated: animated,
             completion: completion)
+
+        guard isViewLoaded else { return }
+        tabView.updateCurrentIndex(index, shouldScroll: true)
     }
 }
 
