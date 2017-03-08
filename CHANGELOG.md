@@ -1,3 +1,10 @@
+# 0.2.5 Release notes (2017-03-08)
+
+## Enhancements
+
+* fix tab background color
+* fix `displayControllerWithIndex`
+
 # 0.2.4 Release notes (2017-03-07)
 
 ## Enhancements
