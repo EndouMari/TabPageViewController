@@ -92,6 +92,9 @@ public extension TabPageViewController {
             direction: direction,
             animated: animated,
             completion: completion)
+
+        guard isViewLoaded else { return }
+        tabView.updateCurrentIndex(index, shouldScroll: true)
     }
 }
 
@@ -127,6 +130,7 @@ extension TabPageViewController {
         if let navigationBar = navigationController?.navigationBar {
             navigationBar.shadowImage = UIImage()
             navigationBar.setBackgroundImage(option.tabBackgroundImage, for: .default)
+            navigationBar.isTranslucent = option.isTranslucent
         }
     }
 
