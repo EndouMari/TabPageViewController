@@ -61,6 +61,7 @@ Use TabPageOption
 `tabMargin: CGFloat`
 
 * tabBackgroundColor for tab view
+* Set alpha to 0.95
 
 `tabBackgroundColor: UIColor`
 
