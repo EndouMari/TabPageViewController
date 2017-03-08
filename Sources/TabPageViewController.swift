@@ -127,6 +127,7 @@ extension TabPageViewController {
         if let navigationBar = navigationController?.navigationBar {
             navigationBar.shadowImage = UIImage()
             navigationBar.setBackgroundImage(option.tabBackgroundImage, for: .default)
+            navigationBar.isTranslucent = option.isTranslucent
         }
     }
 
