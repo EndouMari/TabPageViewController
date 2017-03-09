@@ -10,7 +10,6 @@
 		4C2122B01E6E8AF300572DBD /* TabCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2122AA1E6E8AF300572DBD /* TabCollectionCell.swift */; };
 		4C2122B11E6E8AF300572DBD /* TabPageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2122AC1E6E8AF300572DBD /* TabPageOption.swift */; };
 		4C2122B21E6E8AF300572DBD /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2122AE1E6E8AF300572DBD /* TabView.swift */; };
-		4C2122F31E6E930B00572DBD /* TabPageViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* TabPageViewController.framework */; };
 		4C2122F61E6E9A9000572DBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2122E81E6E8FB100572DBD /* AppDelegate.swift */; };
 		4C2122F71E6E9A9500572DBD /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2122E41E6E8FA500572DBD /* ListViewController.swift */; };
 		4C2122F81E6E9A9500572DBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2122E51E6E8FA500572DBD /* ViewController.swift */; };
@@ -19,6 +18,8 @@
 		4C2122FE1E6EA1FB00572DBD /* TabCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C2122AB1E6E8AF300572DBD /* TabCollectionCell.xib */; };
 		4C2122FF1E6EA1FB00572DBD /* TabPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C2122AD1E6E8AF300572DBD /* TabPageViewController.storyboard */; };
 		4C2123001E6EA1FB00572DBD /* TabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C2122AF1E6E8AF300572DBD /* TabView.xib */; };
+		4C4753CA1E7159C600D9DD5C /* TabPageViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* TabPageViewController.framework */; };
+		4C4753CB1E7159C600D9DD5C /* TabPageViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* TabPageViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		OBJ_21 /* TabPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* TabPageViewController.swift */; };
 		OBJ_28 /* TabPageViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* TabPageViewControllerTests.swift */; };
 		OBJ_30 /* TabPageViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* TabPageViewController.framework */; };
@@ -32,7 +33,28 @@
 			remoteGlobalIDString = OBJ_16;
 			remoteInfo = TabPageViewController;
 		};
+		4C4753CC1E7159C600D9DD5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_16;
+			remoteInfo = TabPageViewController;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4C4753CE1E7159C600D9DD5C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4C4753CB1E7159C600D9DD5C /* TabPageViewController.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4C2122AA1E6E8AF300572DBD /* TabCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCollectionCell.swift; sourceTree = "<group>"; };
@@ -61,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C2122F31E6E930B00572DBD /* TabPageViewController.framework in Frameworks */,
+				4C4753CA1E7159C600D9DD5C /* TabPageViewController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,10 +206,12 @@
 				4C2122CB1E6E8E9700572DBD /* Sources */,
 				4C2122CC1E6E8E9700572DBD /* Frameworks */,
 				4C2122CD1E6E8E9700572DBD /* Resources */,
+				4C4753CE1E7159C600D9DD5C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4C4753CD1E7159C600D9DD5C /* PBXTargetDependency */,
 			);
 			name = TabPageViewControllerDemo;
 			productName = TabPageViewControllerDemo;
@@ -239,6 +263,7 @@
 				TargetAttributes = {
 					4C2122CE1E6E8E9700572DBD = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = ZX4AV7HKD2;
 						ProvisioningStyle = Automatic;
 					};
 					OBJ_16 = {
@@ -321,6 +346,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4C4753CD1E7159C600D9DD5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_16 /* TabPageViewController */;
+			targetProxy = 4C4753CC1E7159C600D9DD5C /* PBXContainerItemProxy */;
+		};
 		OBJ_31 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = OBJ_16 /* TabPageViewController */;
@@ -372,7 +402,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZX4AV7HKD2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -422,7 +452,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZX4AV7HKD2;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -448,7 +478,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -471,7 +502,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
