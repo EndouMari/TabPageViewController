@@ -36,6 +36,7 @@ internal class TabView: UIView {
     @IBOutlet fileprivate weak var collectionView: UICollectionView!
     @IBOutlet fileprivate weak var currentBarView: UIView!
     @IBOutlet fileprivate weak var currentBarViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var currentBarViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var bottomBarViewHeightConstraint: NSLayoutConstraint!
 
     init(isInfinity: Bool, option: TabPageOption) {
@@ -89,6 +90,7 @@ internal class TabView: UIView {
         collectionView.scrollsToTop = false
 
         currentBarView.backgroundColor = option.currentColor
+        currentBarViewHeightConstraint.constant = option.currentBarHeight
         if !isInfinity {
             currentBarView.removeFromSuperview()
             collectionView.addSubview(currentBarView)
@@ -99,7 +101,7 @@ internal class TabView: UIView {
                 toItem: collectionView,
                 attribute: .top,
                 multiplier: 1.0,
-                constant: option.tabHeight - currentBarView.frame.height)
+                constant: option.tabHeight - currentBarViewHeightConstraint.constant)
 
             let left = NSLayoutConstraint(item: currentBarView,
                 attribute: .leading,

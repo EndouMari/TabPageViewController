@@ -60,6 +60,10 @@ Use TabPageOption
 
 `tabBackgroundColor: UIColor`
 
+* currentBarHeight for current bar view
+
+`currentBarHeight: CGFloat`
+
 * pageBackgoundColor for tab page viewcontroller 
 
 `pageBackgoundColor: UIColor`

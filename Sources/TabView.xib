@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,6 +15,7 @@
                 <outlet property="collectionView" destination="Xf0-gn-U1c" id="nmM-7j-unw"/>
                 <outlet property="contentView" destination="ht5-fO-CtR" id="UEk-E7-6ts"/>
                 <outlet property="currentBarView" destination="pCA-AJ-Zrg" id="g8t-Py-ZPA"/>
+                <outlet property="currentBarViewHeightConstraint" destination="M76-sL-SLw" id="cj7-Ju-pz2"/>
                 <outlet property="currentBarViewWidthConstraint" destination="TzL-4E-b4p" id="RRO-7B-4Qd"/>
             </connections>
         </placeholder>
