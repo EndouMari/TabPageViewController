@@ -1,3 +1,10 @@
+# 0.2.6 Release notes (2017-03-30)
+
+## Enhancements
+
+* add tab option
+* hides tab bar on swipe
+
 # 0.2.5 Release notes (2017-03-08)
 
 ## Enhancements

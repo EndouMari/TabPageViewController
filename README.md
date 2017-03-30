@@ -60,6 +60,10 @@ Use TabPageOption
 
 `tabBackgroundColor: UIColor`
 
+* currentBarHeight for current bar view
+
+`currentBarHeight: CGFloat`
+
 * pageBackgoundColor for tab page viewcontroller 
 
 `pageBackgoundColor: UIColor`
@@ -67,6 +71,10 @@ Use TabPageOption
 * isTranslucent for tab view and navigation bar 
 
 `isTranslucent: Bool`
+
+* hides tabbar on swipe
+
+`hidesTabBarOnSwipe: Bool`
 
 ## Usage
 

@@ -11,7 +11,11 @@ import UIKit
 class TabCollectionCell: UICollectionViewCell {
 
     var tabItemButtonPressedBlock: ((Void) -> Void)?
-    var option: TabPageOption = TabPageOption()
+    var option: TabPageOption = TabPageOption() {
+        didSet {
+            currentBarViewHeightConstraint.constant = option.currentBarHeight
+        }
+    }
     var item: String = "" {
         didSet {
             itemLabel.text = item
@@ -34,6 +38,7 @@ class TabCollectionCell: UICollectionViewCell {
 
     @IBOutlet fileprivate weak var itemLabel: UILabel!
     @IBOutlet fileprivate weak var currentBarView: UIView!
+    @IBOutlet fileprivate weak var currentBarViewHeightConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
