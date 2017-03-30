@@ -72,6 +72,10 @@ Use TabPageOption
 
 `isTranslucent: Bool`
 
+* hides tabbar on swipe
+
+`hidesTabBarOnSwipe: Bool`
+
 ## Usage
 
 `import TabPageViewController` to use TabPageViewController in your file.
