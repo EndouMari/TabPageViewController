@@ -22,6 +22,7 @@ public struct TabPageOption {
     public var tabBackgroundColor: UIColor = .white
     public var pageBackgoundColor: UIColor = UIColor.white
     public var isTranslucent: Bool = true
+    public var hidesTabBarOnSwipe: Bool = false
 
     internal var tabBarAlpha: CGFloat {
         return isTranslucent ? 0.95 : 1.0

@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         var option = TabPageOption()
         option.tabWidth = view.frame.width / CGFloat(tc.tabItems.count)
         tc.option = option
+        tc.option.hidesTabBarOnSwipe = true
         navigationController?.pushViewController(tc, animated: true)
     }
 
