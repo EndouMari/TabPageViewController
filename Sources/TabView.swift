@@ -255,9 +255,8 @@ extension TabView {
                     if !animated && shouldScroll {
                         cell.isCurrent = true
                     }
-                    if !self.isInfinity {
-                        self.updateCollectionViewUserInteractionEnabled(true)
-                    }
+                    
+                    self.updateCollectionViewUserInteractionEnabled(true)
             })
         }
         beforeIndex = currentIndex
