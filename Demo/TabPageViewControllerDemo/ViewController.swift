@@ -55,5 +55,8 @@ class ViewController: UIViewController {
         option.tabMargin = 30.0
         tc.option = option
         navigationController?.pushViewController(tc, animated: true)
+
+        // Change tab title
+        tc.setTabItemTitle("Mon.(*)", at: 0)
     }
 }

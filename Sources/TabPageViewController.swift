@@ -313,6 +313,16 @@ extension TabPageViewController: UIPageViewControllerDataSource {
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         return nextViewController(viewController, isAfter: false)
     }
+
+    public func setTabItemTitle(_ title: String, at: Int) {
+        guard 0..<tabItems.count ~= at else {
+            print("Specified `at` argument was out of range")
+            return
+        }
+
+        tabItems[at].title = title
+        tabView.pageTabItems[at] = tabItems[at].title
+    }
 }
 
 
