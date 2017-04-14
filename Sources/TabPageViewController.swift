@@ -238,9 +238,14 @@ extension TabPageViewController {
 
         if option.hidesTabBarOnSwipe {
             updateTabBarOrigin(hidden: hidden)
+            if hidden == false {
+                showNavigationBar()
+            }
         }
-
-        navigationController.setNavigationBarHidden(hidden, animated: animated)
+        
+        if option.hidesNavigationBarOnSwipe && hidden {
+            navigationController.setNavigationBarHidden(true, animated: animated)
+        }
 
         if statusView == nil {
             setupStatusView()
