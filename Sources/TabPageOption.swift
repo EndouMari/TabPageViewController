@@ -8,6 +8,13 @@
 
 import UIKit
 
+public enum ScrollViewContent {
+    case None
+    case ScrollTabOnly
+    case NavigationBarOnly
+    case SrcollTabAndNavigationBar
+}
+
 public struct TabPageOption {
 
     public init() {}
@@ -22,8 +29,7 @@ public struct TabPageOption {
     public var tabBackgroundColor: UIColor = .white
     public var pageBackgoundColor: UIColor = UIColor.white
     public var isTranslucent: Bool = true
-    public var hidesTabBarOnSwipe: Bool = false
-    public var hidesNavigationBarOnSwipe: Bool = false
+    public var hidesTopViewOnSwipe: ScrollViewContent = .None
 
     internal var tabBarAlpha: CGFloat {
         return isTranslucent ? 0.95 : 1.0
