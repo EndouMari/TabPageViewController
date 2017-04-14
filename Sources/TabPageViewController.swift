@@ -44,7 +44,7 @@ open class TabPageViewController: UIPageViewController {
 
         setupPageViewController()
         setupScrollView()
-        updateNavigationBar()
+        if option.coverNavBar { updateNavigationBar() }
     }
 
     override open func viewWillAppear(_ animated: Bool) {
@@ -62,7 +62,7 @@ open class TabPageViewController: UIPageViewController {
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        updateNavigationBar()
+        if option.coverNavBar { updateNavigationBar() }
         tabView.layouted = true
     }
 
