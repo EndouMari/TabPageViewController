@@ -236,16 +236,16 @@ extension TabPageViewController {
     public func updateNavigationBarHidden(_ hidden: Bool, animated: Bool) {
         guard let navigationController = navigationController else { return }
 
-        switch option.hidesTopViewOnSwipe {
-        case .ScrollTabOnly:
+        switch option.hidesTopViewOnSwipeType {
+        case .tabBar:
             updateTabBarOrigin(hidden: hidden)
-        case .NavigationBarOnly:
+        case .navigationBar:
             if hidden {
                 navigationController.setNavigationBarHidden(true, animated: true)
             } else {
                 showNavigationBar()
             }
-        case .SrcollTabAndNavigationBar:
+        case .all:
             updateTabBarOrigin(hidden: hidden)
             if hidden {
                 navigationController.setNavigationBarHidden(true, animated: true)
@@ -267,7 +267,7 @@ extension TabPageViewController {
         guard navigationController.isNavigationBarHidden  else { return }
         guard let tabBarTopConstraint = tabBarTopConstraint else { return }
 
-        if option.hidesTopViewOnSwipe != .None {
+        if option.hidesTopViewOnSwipeType != .none {
             tabBarTopConstraint.constant = 0.0
             UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration)) {
                 self.view.layoutIfNeeded()
