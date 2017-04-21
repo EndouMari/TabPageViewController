@@ -25,9 +25,8 @@ open class TabPageViewController: UIPageViewController {
     }
     fileprivate var beforeIndex: Int = 0
     fileprivate var tabItemsCount = 0
-    fileprivate var defaultContentOffsetX: CGFloat {
-        return self.view.bounds.width
-    }
+    fileprivate var defaultContentOffsetX: CGFloat = UIScreen.main.bounds.width
+    
     fileprivate var shouldScrollCurrentBar: Bool = true
     lazy fileprivate var tabView: TabView = self.configuredTabView()
     fileprivate var statusView: UIView?
@@ -44,7 +43,7 @@ open class TabPageViewController: UIPageViewController {
 
         setupPageViewController()
         setupScrollView()
-        updateNavigationBar()
+        if option.coverNavBar { updateNavigationBar() }
     }
 
     override open func viewWillAppear(_ animated: Bool) {
@@ -62,7 +61,7 @@ open class TabPageViewController: UIPageViewController {
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        updateNavigationBar()
+        if option.coverNavBar { updateNavigationBar() }
         tabView.layouted = true
     }
 
@@ -71,6 +70,11 @@ open class TabPageViewController: UIPageViewController {
 
         navigationController?.navigationBar.shadowImage = nil
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+    }
+    
+    
+    public func refreshTabs() {
+        tabView = configuredTabView()
     }
 }
 
