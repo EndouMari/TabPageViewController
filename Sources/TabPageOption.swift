@@ -24,10 +24,10 @@ public struct TabPageOption {
     public var isTranslucent: Bool = true
     public var hidesTabBarOnSwipe: Bool = false
     public var coverNavBar: Bool = false
-
-    internal var tabBarAlpha: CGFloat {
-        return isTranslucent ? 0.95 : 1.0
-    }
+    public var tabBarAlpha: CGFloat = 0.95
+//    public var tabBarAlpha: CGFloat {
+//        return isTranslucent ? 0.95 : 1.0
+//    }
     internal var tabBackgroundImage: UIImage {
         return convertImage()
     }
