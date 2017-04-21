@@ -1,3 +1,9 @@
+# 0.2.7 Release notes (2017-04-13)
+
+## Enhancements
+
+* fixed bug 
+
 # 0.2.6 Release notes (2017-03-30)
 
 ## Enhancements

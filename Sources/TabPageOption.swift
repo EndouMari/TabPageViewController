@@ -8,6 +8,13 @@
 
 import UIKit
 
+public enum HidesTopContentsOnSwipeType {
+    case none
+    case tabBar
+    case navigationBar
+    case all
+}
+
 public struct TabPageOption {
 
     public init() {}
@@ -22,7 +29,7 @@ public struct TabPageOption {
     public var tabBackgroundColor: UIColor = .white
     public var pageBackgoundColor: UIColor = UIColor.white
     public var isTranslucent: Bool = true
-    public var hidesTabBarOnSwipe: Bool = false
+    public var hidesTopViewOnSwipeType: HidesTopContentsOnSwipeType = .none
     public var coverNavBar: Bool = false
 
     internal var tabBarAlpha: CGFloat {
