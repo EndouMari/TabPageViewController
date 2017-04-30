@@ -15,6 +15,12 @@ open class TabView: UIView {
         didSet {
             pageTabItemsCount = pageTabItems.count
             beforeIndex = pageTabItems.count
+
+            // pageTabItems を変更したらリロード
+            if let c = collectionView {
+                print("Reload collectionView")
+                c.reloadData()
+            }
         }
     }
     var layouted: Bool = false
