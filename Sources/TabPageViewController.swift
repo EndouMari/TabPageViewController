@@ -11,11 +11,7 @@ import UIKit
 open class TabPageViewController: UIPageViewController {
     open var isInfinity: Bool = false
     open var option: TabPageOption = TabPageOption()
-    open var tabItems: [(viewController: UIViewController, title: String)] = [] {
-        didSet {
-            tabItemsCount = tabItems.count
-        }
-    }
+    open var tabItems: [(viewController: UIViewController, title: String)] = []
 
     var currentIndex: Int? {
         guard let viewController = viewControllers?.first else {
@@ -24,7 +20,9 @@ open class TabPageViewController: UIPageViewController {
         return tabItems.map{ $0.viewController }.index(of: viewController)
     }
     fileprivate var beforeIndex: Int = 0
-    fileprivate var tabItemsCount = 0
+    fileprivate var tabItemsCount: Int {
+        return tabItems.count
+    }
     fileprivate var defaultContentOffsetX: CGFloat {
         return self.view.bounds.width
     }
