@@ -291,7 +291,7 @@ extension TabPageViewController {
 
 extension TabPageViewController: UIPageViewControllerDataSource {
 
-    fileprivate func nextViewController(_ viewController: UIViewController, isAfter: Bool) -> UIViewController? {
+    private func nextViewController(_ viewController: UIViewController, isAfter: Bool) -> UIViewController? {
 
         guard var index = tabItems.map({$0.viewController}).index(of: viewController) else {
             return nil
