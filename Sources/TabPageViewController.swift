@@ -134,10 +134,9 @@ extension TabPageViewController {
 
     fileprivate func updateNavigationBar() {
         if let navigationBar = navigationController?.navigationBar {
-          // Commented out to change navigationBar's color from outside of framework
-//            navigationBar.shadowImage = UIImage()
-//            navigationBar.setBackgroundImage(option.tabBackgroundImage, for: .default)
-//            navigationBar.isTranslucent = option.isTranslucent
+            navigationBar.shadowImage = UIImage()
+            navigationBar.setBackgroundImage(option.tabBackgroundImage, for: .default)
+            navigationBar.isTranslucent = option.isTranslucent
         }
     }
 
