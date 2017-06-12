@@ -53,6 +53,8 @@ class ViewController: UIViewController {
         var option = TabPageOption()
         option.currentColor = UIColor(red: 246/255, green: 175/255, blue: 32/255, alpha: 1.0)
         option.tabMargin = 30.0
+        option.highlightFontName = "Copperplate-Bold"
+        option.unHighlightFontName = "Copperplate"
         tc.option = option
         navigationController?.pushViewController(tc, animated: true)
     }
