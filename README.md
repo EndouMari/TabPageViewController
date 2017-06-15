@@ -40,12 +40,20 @@ Use TabPageOption
 
 `fontSize: CGFloat`
 
+* highlightFontName for tab item
+
+`highlightFontName: String`
+
+* unHighlightFontName for tab item
+
+`unHighlightFontName: String`
+
 * currentColor for current tab item
 
 `currentColor: UIColor`
 
 * defaultColor for tab item
- 
+
 `defaultColor: UIColor`
 
 * tabHeight for tab view
@@ -64,11 +72,11 @@ Use TabPageOption
 
 `currentBarHeight: CGFloat`
 
-* pageBackgoundColor for tab page viewcontroller 
+* pageBackgoundColor for tab page viewcontroller
 
 `pageBackgoundColor: UIColor`
 
-* isTranslucent for tab view and navigation bar 
+* isTranslucent for tab view and navigation bar
 
 `isTranslucent: Bool`
 
@@ -81,7 +89,7 @@ Use TabPageOption
 `import TabPageViewController` to use TabPageViewController in your file.
 
 
-### Example 
+### Example
 
 ```swift
 let tabPageViewController = TabPageViewController.create()
@@ -94,7 +102,7 @@ TabPageOption.currentColor = UIColor.redColor()
 
 ```
 
-Infinity Mode 
+Infinity Mode
 
 ```swift
 let tabPageViewController = TabPageViewController.create()
