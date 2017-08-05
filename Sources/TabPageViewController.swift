@@ -32,9 +32,12 @@ open class TabPageViewController: UIPageViewController {
     fileprivate var statusViewHeightConstraint: NSLayoutConstraint?
     fileprivate var tabBarTopConstraint: NSLayoutConstraint?
 
-    open static func create() -> TabPageViewController {
-        let sb = UIStoryboard(name: "TabPageViewController", bundle: Bundle(for: TabPageViewController.self))
-        return sb.instantiateInitialViewController() as! TabPageViewController
+    public init() {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
 
     override open func viewDidLoad() {

@@ -16,10 +16,11 @@
 		4C2122F91E6E9AA800572DBD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C2122F41E6E93DF00572DBD /* LaunchScreen.xib */; };
 		4C2122FA1E6E9AAE00572DBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C2122EC1E6E8FC300572DBD /* Main.storyboard */; };
 		4C2122FE1E6EA1FB00572DBD /* TabCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C2122AB1E6E8AF300572DBD /* TabCollectionCell.xib */; };
-		4C2122FF1E6EA1FB00572DBD /* TabPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C2122AD1E6E8AF300572DBD /* TabPageViewController.storyboard */; };
 		4C2123001E6EA1FB00572DBD /* TabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C2122AF1E6E8AF300572DBD /* TabView.xib */; };
 		4C4753CA1E7159C600D9DD5C /* TabPageViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* TabPageViewController.framework */; };
 		4C4753CB1E7159C600D9DD5C /* TabPageViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* TabPageViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F8CE39F71F35AE3A00CF74BA /* LimitedTabPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE39F61F35AE3A00CF74BA /* LimitedTabPageViewController.swift */; };
+		F8CE39F91F35AE6500CF74BA /* InfiniteTabPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CE39F81F35AE6500CF74BA /* InfiniteTabPageViewController.swift */; };
 		OBJ_21 /* TabPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* TabPageViewController.swift */; };
 		OBJ_28 /* TabPageViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* TabPageViewControllerTests.swift */; };
 		OBJ_30 /* TabPageViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* TabPageViewController.framework */; };
@@ -60,7 +61,6 @@
 		4C2122AA1E6E8AF300572DBD /* TabCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabCollectionCell.swift; sourceTree = "<group>"; };
 		4C2122AB1E6E8AF300572DBD /* TabCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabCollectionCell.xib; sourceTree = "<group>"; };
 		4C2122AC1E6E8AF300572DBD /* TabPageOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabPageOption.swift; sourceTree = "<group>"; };
-		4C2122AD1E6E8AF300572DBD /* TabPageViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabPageViewController.storyboard; sourceTree = "<group>"; };
 		4C2122AE1E6E8AF300572DBD /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		4C2122AF1E6E8AF300572DBD /* TabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabView.xib; sourceTree = "<group>"; };
 		4C2122CF1E6E8E9700572DBD /* TabPageViewControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabPageViewControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +72,8 @@
 		4C2122EE1E6E8FD300572DBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Demo/TabPageViewControllerDemo/Assets.xcassets; sourceTree = "<group>"; };
 		4C2122F21E6E91FA00572DBD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C2122F51E6E93DF00572DBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Demo/TabPageViewControllerDemo/Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F8CE39F61F35AE3A00CF74BA /* LimitedTabPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LimitedTabPageViewController.swift; path = Demo/TabPageViewControllerDemo/LimitedTabPageViewController.swift; sourceTree = "<group>"; };
+		F8CE39F81F35AE6500CF74BA /* InfiniteTabPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfiniteTabPageViewController.swift; path = Demo/TabPageViewControllerDemo/InfiniteTabPageViewController.swift; sourceTree = "<group>"; };
 		OBJ_12 /* TabPageViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPageViewControllerTests.swift; sourceTree = "<group>"; };
 		OBJ_14 /* TabPageViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TabPageViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_15 /* TabPageViewControllerTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = TabPageViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +125,8 @@
 				4C2122E41E6E8FA500572DBD /* ListViewController.swift */,
 				4C2122EC1E6E8FC300572DBD /* Main.storyboard */,
 				4C2122E51E6E8FA500572DBD /* ViewController.swift */,
+				F8CE39F61F35AE3A00CF74BA /* LimitedTabPageViewController.swift */,
+				F8CE39F81F35AE6500CF74BA /* InfiniteTabPageViewController.swift */,
 			);
 			name = TabPageViewController;
 			sourceTree = "<group>";
@@ -187,7 +191,6 @@
 				4C2122AA1E6E8AF300572DBD /* TabCollectionCell.swift */,
 				4C2122AB1E6E8AF300572DBD /* TabCollectionCell.xib */,
 				4C2122AC1E6E8AF300572DBD /* TabPageOption.swift */,
-				4C2122AD1E6E8AF300572DBD /* TabPageViewController.storyboard */,
 				OBJ_9 /* TabPageViewController.swift */,
 				4C2122AE1E6E8AF300572DBD /* TabView.swift */,
 				4C2122AF1E6E8AF300572DBD /* TabView.xib */,
@@ -306,7 +309,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C2122FE1E6EA1FB00572DBD /* TabCollectionCell.xib in Resources */,
-				4C2122FF1E6EA1FB00572DBD /* TabPageViewController.storyboard in Resources */,
 				4C2123001E6EA1FB00572DBD /* TabView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,9 +320,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8CE39F71F35AE3A00CF74BA /* LimitedTabPageViewController.swift in Sources */,
 				4C2122F71E6E9A9500572DBD /* ListViewController.swift in Sources */,
 				4C2122F81E6E9A9500572DBD /* ViewController.swift in Sources */,
 				4C2122F61E6E9A9000572DBD /* AppDelegate.swift in Sources */,
+				F8CE39F91F35AE6500CF74BA /* InfiniteTabPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
