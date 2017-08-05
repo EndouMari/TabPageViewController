@@ -104,7 +104,7 @@ tabPageViewController.isInfinity = true
 
 ## Requirements
 
-iOS8+
+iOS9+
 
 ## Installation
 
