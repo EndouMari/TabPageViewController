@@ -11,13 +11,13 @@ import UIKit
 open class TabPageViewController: UIPageViewController {
     open var isInfinity: Bool = false
     open var option: TabPageOption = TabPageOption()
-    open var tabItems: [(viewController: UIViewController, title: String)] = []
+    open var tabItems: [UIViewController] = []
 
     var currentIndex: Int? {
         guard let viewController = viewControllers?.first else {
             return nil
         }
-        return tabItems.map{ $0.viewController }.index(of: viewController)
+        return tabItems.index(of: viewController)
     }
     fileprivate var beforeIndex: Int = 0
     fileprivate var tabItemsCount: Int {
@@ -81,7 +81,7 @@ public extension TabPageViewController {
 
         beforeIndex = index
         shouldScrollCurrentBar = false
-        let nextViewControllers: [UIViewController] = [tabItems[index].viewController]
+        let nextViewControllers = [tabItems[index]]
 
         let completion: ((Bool) -> Void) = { [weak self] _ in
             self?.shouldScrollCurrentBar = true
@@ -109,7 +109,7 @@ extension TabPageViewController {
         delegate = self
         automaticallyAdjustsScrollViewInsets = false
 
-        setViewControllers([tabItems[beforeIndex].viewController],
+        setViewControllers([tabItems[beforeIndex]],
                            direction: .forward,
                            animated: false,
                            completion: nil)
@@ -148,7 +148,7 @@ extension TabPageViewController {
             tabView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
 
-        tabView.pageTabItems = tabItems.map({ $0.title})
+        tabView.pageTabItems = tabItems.map { $0.title ?? "" }
         tabView.updateCurrentIndex(beforeIndex, shouldScroll: true)
 
         tabView.pageItemPressedBlock = { [weak self] (index: Int, direction: UIPageViewControllerNavigationDirection) in
@@ -236,8 +236,7 @@ extension TabPageViewController {
 extension TabPageViewController: UIPageViewControllerDataSource {
 
     fileprivate func nextViewController(_ viewController: UIViewController, isAfter: Bool) -> UIViewController? {
-
-        guard var index = tabItems.map({$0.viewController}).index(of: viewController) else {
+        guard var index = tabItems.index(of: viewController) else {
             return nil
         }
 
@@ -256,7 +255,7 @@ extension TabPageViewController: UIPageViewControllerDataSource {
         }
 
         if index >= 0 && index < tabItems.count {
-            return tabItems[index].viewController
+            return tabItems[index]
         }
         return nil
     }
