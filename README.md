@@ -86,9 +86,11 @@ Use TabPageOption
 ```swift
 let tabPageViewController = TabPageViewController.create()
 let vc1 = UIViewController()
+vc1.title = "First"
 let vc2 = UIViewController()
+vc2.title = "Second"
 
-tabPageViewController.tabItems = [(vc1, "First"), (vc2, "Second")]
+tabPageViewController.tabItems = [vc1, vc2]
 
 TabPageOption.currentColor = UIColor.redColor()
 
