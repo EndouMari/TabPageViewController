@@ -13,7 +13,7 @@ open class TabPageViewController: UIPageViewController {
     open var option: TabPageOption = TabPageOption()
     open var tabItems: [UIViewController] = []
 
-    var currentIndex: Int? {
+    open var currentIndex: Int? {
         guard let viewController = viewControllers?.first else {
             return nil
         }
