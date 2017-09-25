@@ -9,9 +9,9 @@
 import UIKit
 
 open class TabPageViewController: UIPageViewController {
-    open var isInfinity: Bool = false
-    open var option: TabPageOption = TabPageOption()
-    open var tabItems: [UIViewController] = []
+    open var isInfinity = false
+    open var option = TabPageOption()
+    open var tabItems = [UIViewController]()
 
     open var currentIndex: Int? {
         guard let viewController = viewControllers?.first else {
@@ -19,15 +19,15 @@ open class TabPageViewController: UIPageViewController {
         }
         return tabItems.index(of: viewController)
     }
-    fileprivate var beforeIndex: Int = 0
+    fileprivate var beforeIndex = 0
     fileprivate var tabItemsCount: Int {
         return tabItems.count
     }
     fileprivate var defaultContentOffsetX: CGFloat {
         return self.view.bounds.width
     }
-    fileprivate var shouldScrollCurrentBar: Bool = true
-    lazy fileprivate var tabView: TabView = self.configuredTabView()
+    fileprivate var shouldScrollCurrentBar = true
+    lazy fileprivate var tabView = self.configuredTabView()
     fileprivate var statusView: UIView?
     fileprivate var statusViewHeightConstraint: NSLayoutConstraint?
     fileprivate var tabBarTopConstraint: NSLayoutConstraint?
@@ -58,6 +58,8 @@ open class TabPageViewController: UIPageViewController {
         if let currentIndex = currentIndex , isInfinity {
             tabView.updateCurrentIndex(currentIndex, shouldScroll: true)
         }
+
+        updateNavigationBar()
     }
 
     override open func viewDidAppear(_ animated: Bool) {
@@ -208,9 +210,10 @@ extension TabPageViewController {
     }
 
     public func showNavigationBar() {
-        guard let navigationController = navigationController else { return }
-        guard navigationController.isNavigationBarHidden  else { return }
-        guard let tabBarTopConstraint = tabBarTopConstraint else { return }
+        guard let navigationController = navigationController,
+            navigationController.isNavigationBarHidden,
+            let tabBarTopConstraint = tabBarTopConstraint
+            else { return }
 
         if option.hidesTopViewOnSwipeType != .none {
             tabBarTopConstraint.constant = 0.0
@@ -243,11 +246,7 @@ extension TabPageViewController: UIPageViewControllerDataSource {
             return nil
         }
 
-        if isAfter {
-            index += 1
-        } else {
-            index -= 1
-        }
+        index += isAfter ? 1 : -1
 
         if isInfinity {
             if index < 0 {
