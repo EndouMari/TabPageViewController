@@ -22,14 +22,14 @@ public struct TabPageOption {
     public var fontSize = UIFont.systemFontSize
     public var currentColor = UIColor(red: 105/255, green: 182/255, blue: 245/255, alpha: 1.0)
     public var defaultColor = UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 1.0)
-    public var tabHeight: CGFloat = 32.0
-    public var tabMargin: CGFloat = 20.0
+    public var tabHeight = CGFloat(32.0)
+    public var tabMargin = CGFloat(20.0)
     public var tabWidth: CGFloat?
-    public var currentBarHeight: CGFloat = 2.0
-    public var tabBackgroundColor: UIColor = .white
-    public var pageBackgoundColor: UIColor = UIColor.white
-    public var isTranslucent: Bool = true
-    public var hidesTopViewOnSwipeType: HidesTopContentsOnSwipeType = .none
+    public var currentBarHeight = CGFloat(2.0)
+    public var tabBackgroundColor = UIColor.white
+    public var pageBackgoundColor = UIColor.white
+    public var isTranslucent = true
+    public var hidesTopViewOnSwipeType = HidesTopContentsOnSwipeType.none
 
     internal var tabBarAlpha: CGFloat {
         return isTranslucent ? 0.95 : 1.0
@@ -39,13 +39,13 @@ public struct TabPageOption {
     }
 
     fileprivate func convertImage() -> UIImage {
-        let rect : CGRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
-        let context : CGContext? = UIGraphicsGetCurrentContext()
+        let context = UIGraphicsGetCurrentContext()
         let backgroundColor = tabBackgroundColor.withAlphaComponent(tabBarAlpha).cgColor
         context?.setFillColor(backgroundColor)
         context?.fill(rect)
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }

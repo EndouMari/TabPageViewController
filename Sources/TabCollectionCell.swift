@@ -10,7 +10,7 @@ import UIKit
 
 class TabCollectionCell: UICollectionViewCell {
 
-    var tabItemButtonPressedBlock: ((Void) -> Void)?
+    var tabItemButtonPressedBlock: (() -> Void)?
     var option: TabPageOption = TabPageOption() {
         didSet {
             currentBarViewHeightConstraint.constant = option.currentBarHeight
@@ -47,11 +47,7 @@ class TabCollectionCell: UICollectionViewCell {
     }
 
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        if item.characters.count == 0 {
-            return CGSize.zero
-        }
-
-        return intrinsicContentSize
+        return item.isEmpty ? .zero : intrinsicContentSize
     }
 
     class func cellIdentifier() -> String {
@@ -63,6 +59,7 @@ class TabCollectionCell: UICollectionViewCell {
 // MARK: - View
 
 extension TabCollectionCell {
+
     override var intrinsicContentSize : CGSize {
         let width: CGFloat
         if let tabWidth = option.tabWidth , tabWidth > 0.0 {
@@ -71,8 +68,7 @@ extension TabCollectionCell {
             width = itemLabel.intrinsicContentSize.width + option.tabMargin * 2
         }
 
-        let size = CGSize(width: width, height: option.tabHeight)
-        return size
+        return CGSize(width: width, height: option.tabHeight)
     }
 
     func hideCurrentBarView() {
@@ -85,12 +81,12 @@ extension TabCollectionCell {
 
     func highlightTitle() {
         itemLabel.textColor = option.currentColor
-        itemLabel.font = UIFont.boldSystemFont(ofSize: option.fontSize)
+        itemLabel.font = .boldSystemFont(ofSize: option.fontSize)
     }
 
     func unHighlightTitle() {
         itemLabel.textColor = option.defaultColor
-        itemLabel.font = UIFont.systemFont(ofSize: option.fontSize)
+        itemLabel.font = .systemFont(ofSize: option.fontSize)
     }
 }
 
@@ -98,6 +94,7 @@ extension TabCollectionCell {
 // MARK: - IBAction
 
 extension TabCollectionCell {
+
     @IBAction fileprivate func tabItemTouchUpInside(_ button: UIButton) {
         tabItemButtonPressedBlock?()
     }
