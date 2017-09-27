@@ -322,7 +322,7 @@ extension TabView: UICollectionViewDataSource {
                 self?.updateCollectionViewUserInteractionEnabled(false)
             }
             self?.updateCurrentIndexForTap(indexPath.item)
-        }
+        } as (() -> Void)
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
