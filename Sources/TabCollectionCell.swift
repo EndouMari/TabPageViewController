@@ -47,7 +47,7 @@ class TabCollectionCell: UICollectionViewCell {
     }
 
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        if item.characters.count == 0 {
+        if item.isEmpy {
             return CGSize.zero
         }
 
