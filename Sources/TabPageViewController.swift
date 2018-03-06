@@ -11,23 +11,17 @@ import UIKit
 open class TabPageViewController: UIPageViewController {
     open var isInfinity: Bool = false
     open var option: TabPageOption = TabPageOption()
-    fileprivate var _tabItems: [TabItemProtocol] = []
-    // For keep compatibility
-    open var tabItems: [(viewController: UIViewController, title: String)] = [] {
-        didSet {
-            self._tabItems = tabItems.map { TabItem(tuple: $0) }
-        }
-    }
+    open var tabItems: [TabItemProtocol] = []
     
     var currentIndex: Int? {
         guard let viewController = viewControllers?.first else {
             return nil
         }
-        return _tabItems.map { $0.cacheViewController }.index { viewController == $0 }
+        return tabItems.map { $0.cacheViewController }.index { viewController == $0 }
     }
     fileprivate var beforeIndex: Int = 0
     fileprivate var tabItemsCount: Int {
-        return _tabItems.count
+        return tabItems.count
     }
     fileprivate var defaultContentOffsetX: CGFloat {
         return self.view.bounds.width
@@ -90,7 +84,7 @@ public extension TabPageViewController {
 
         beforeIndex = index
         shouldScrollCurrentBar = false
-        let nextViewControllers: [UIViewController] = [_tabItems[index].viewController]
+        let nextViewControllers: [UIViewController] = [tabItems[index].viewController]
 
         let completion: ((Bool) -> Void) = { [weak self] _ in
             self?.shouldScrollCurrentBar = true
@@ -108,7 +102,7 @@ public extension TabPageViewController {
     }
     
     public func setTabItems(tabItems: [TabItemProtocol]) {
-        self._tabItems = tabItems
+        self.tabItems = tabItems
         
         setupPageViewController()
         setupScrollView()
@@ -126,7 +120,7 @@ extension TabPageViewController {
         delegate = self
         automaticallyAdjustsScrollViewInsets = false
 
-        setViewControllers([_tabItems[beforeIndex].viewController],
+        setViewControllers([tabItems[beforeIndex].viewController],
                            direction: .forward,
                            animated: false,
                            completion: nil)
@@ -192,7 +186,7 @@ extension TabPageViewController {
 
         view.addConstraints([top, left, right])
 
-        tabView.pageTabItems = _tabItems.map({ $0.title})
+        tabView.pageTabItems = tabItems.map({ $0.title})
         tabView.updateCurrentIndex(beforeIndex, shouldScroll: true)
 
         tabView.pageItemPressedBlock = { [weak self] (index: Int, direction: UIPageViewControllerNavigationDirection) in
@@ -309,7 +303,7 @@ extension TabPageViewController {
 extension TabPageViewController: UIPageViewControllerDataSource {
 
     fileprivate func nextViewController(_ viewController: UIViewController, isAfter: Bool) -> UIViewController? {
-        let currentIndex = self._tabItems.map { $0.cacheViewController }.index { viewController == $0 }
+        let currentIndex = self.tabItems.map { $0.cacheViewController }.index { viewController == $0 }
         guard var index = currentIndex else {
             return nil
         }
@@ -322,14 +316,14 @@ extension TabPageViewController: UIPageViewControllerDataSource {
 
         if isInfinity {
             if index < 0 {
-                index = _tabItems.count - 1
-            } else if index == _tabItems.count {
+                index = tabItems.count - 1
+            } else if index == tabItems.count {
                 index = 0
             }
         }
 
-        if index >= 0 && index < _tabItems.count {
-            return _tabItems[index].viewController
+        if index >= 0 && index < tabItems.count {
+            return tabItems[index].viewController
         }
         return nil
     }

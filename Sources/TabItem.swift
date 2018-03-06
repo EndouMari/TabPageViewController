@@ -35,7 +35,7 @@ public class LazyTabItem: TabItemProtocol {
     public let createViewControllerBlock: ()->UIViewController
     private(set) public weak var cacheViewController: UIViewController?
     
-    init(title: String, createViewController: @escaping ()->UIViewController) {
+    public init(title: String, createViewController: @escaping ()->UIViewController) {
         self.title = title
         self.createViewControllerBlock = createViewController
     }
