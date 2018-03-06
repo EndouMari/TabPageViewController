@@ -11,13 +11,13 @@ import UIKit
 open class TabPageViewController: UIPageViewController {
     open var isInfinity: Bool = false
     open var option: TabPageOption = TabPageOption()
-    open var tabItems: [(viewController: UIViewController, title: String)] = []
-
+    open var tabItems: [TabItemProtocol] = []
+    
     var currentIndex: Int? {
         guard let viewController = viewControllers?.first else {
             return nil
         }
-        return tabItems.map{ $0.viewController }.index(of: viewController)
+        return tabItems.map { $0.cacheViewController }.index { viewController == $0 }
     }
     fileprivate var beforeIndex: Int = 0
     fileprivate var tabItemsCount: Int {
@@ -99,6 +99,14 @@ public extension TabPageViewController {
 
         guard isViewLoaded else { return }
         tabView.updateCurrentIndex(index, shouldScroll: true)
+    }
+    
+    public func setTabItems(tabItems: [TabItemProtocol]) {
+        self.tabItems = tabItems
+        
+        setupPageViewController()
+        setupScrollView()
+        updateNavigationBar()
     }
 }
 
@@ -295,8 +303,8 @@ extension TabPageViewController {
 extension TabPageViewController: UIPageViewControllerDataSource {
 
     fileprivate func nextViewController(_ viewController: UIViewController, isAfter: Bool) -> UIViewController? {
-
-        guard var index = tabItems.map({$0.viewController}).index(of: viewController) else {
+        let currentIndex = self.tabItems.map { $0.cacheViewController }.index { viewController == $0 }
+        guard var index = currentIndex else {
             return nil
         }
 
