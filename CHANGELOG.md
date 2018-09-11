@@ -1,3 +1,9 @@
+# 0.2.8 Release notes (2018-09-11)
+
+## Enhancements
+
+* Fixed Swift 4.2 warnings and updated deployment target to 10.3. 
+
 # 0.2.7 Release notes (2017-04-13)
 
 ## Enhancements
