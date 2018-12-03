@@ -214,15 +214,33 @@ extension TabView {
      */
     fileprivate func updateCurrentIndexForTap(_ index: Int) {
         deselectVisibleCells()
-
-        if isInfinity && (index < pageTabItemsCount) || (index >= pageTabItemsCount * 2) {
-            currentIndex = (index < pageTabItemsCount) ? index + pageTabItemsCount : index - pageTabItemsCount
-            shouldScrollToItem = true
-        } else {
+        if isInfinity{
+            let ind = index % pageTabItemsCount
+            currentIndex = pageTabItemsCount + ind
+            let index = IndexPath(row: pageTabItemsCount + ind, section: 0)
+            collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
+            
+            collectionViewContentOffsetX = collectionView.contentOffset.x
+            currentBarViewWidth = 0.0
+            
+            let firstIndex = IndexPath(row: ind, section: 0)
+            let lastIndex = IndexPath(row: (pageTabItemsCount * 2) + ind, section: 0)
+            if let cell = collectionView.cellForItem(at: firstIndex) as? TabCollectionCell {
+                cell.isCurrent = true
+            }
+            if let cell = collectionView.cellForItem(at: index) as? TabCollectionCell {
+                cell.isCurrent = true
+            }
+            if let cell = collectionView.cellForItem(at: lastIndex) as? TabCollectionCell {
+                cell.isCurrent = true
+            }
+            beforeIndex = currentIndex
+            
+        }else{
             currentIndex = index
+            let indexPath = IndexPath(item: index, section: 0)
+            moveCurrentBarView(indexPath, animated: true, shouldScroll: true)
         }
-        let indexPath = IndexPath(item: index, section: 0)
-        moveCurrentBarView(indexPath, animated: true, shouldScroll: true)
     }
 
     /**
