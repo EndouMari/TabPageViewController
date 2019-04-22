@@ -221,7 +221,7 @@ extension TabView {
         } else {
             currentIndex = index
         }
-        let indexPath = IndexPath(item: index, section: 0)
+        let indexPath = IndexPath(item: currentIndex, section: 0)
         moveCurrentBarView(indexPath, animated: true, shouldScroll: true)
     }
 
