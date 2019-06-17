@@ -12,7 +12,8 @@ open class TabPageViewController: UIPageViewController {
     open var isInfinity: Bool = false
     open var option: TabPageOption = TabPageOption()
     open var tabItems: [(viewController: UIViewController, title: String)] = []
-
+    open var indexSelected: ((Int) -> Void)?
+    
     var currentIndex: Int? {
         guard let viewController = viewControllers?.first else {
             return nil
@@ -182,6 +183,7 @@ extension TabPageViewController {
         tabView.updateCurrentIndex(beforeIndex, shouldScroll: true)
 
         tabView.pageItemPressedBlock = { [weak self] (index: Int, direction: UIPageViewControllerNavigationDirection) in
+            self?.indexSelected?(index)
             self?.displayControllerWithIndex(index, direction: direction, animated: true)
         }
 
@@ -299,7 +301,7 @@ extension TabPageViewController: UIPageViewControllerDataSource {
         guard var index = tabItems.map({$0.viewController}).index(of: viewController) else {
             return nil
         }
-
+        self.indexSelected?(index)
         if isAfter {
             index += 1
         } else {
