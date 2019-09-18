@@ -140,43 +140,16 @@ extension TabPageViewController {
 
     fileprivate func configuredTabView() -> TabView {
         let tabView = TabView(isInfinity: isInfinity, option: option)
-        tabView.translatesAutoresizingMaskIntoConstraints = false
-
-        let height = NSLayoutConstraint(item: tabView,
-                                        attribute: .height,
-                                        relatedBy: .equal,
-                                        toItem: nil,
-                                        attribute: .height,
-                                        multiplier: 1.0,
-                                        constant: option.tabHeight)
-        tabView.addConstraint(height)
         view.addSubview(tabView)
 
-        let top = NSLayoutConstraint(item: tabView,
-                                     attribute: .top,
-                                     relatedBy: .equal,
-                                     toItem: topLayoutGuide,
-                                     attribute: .bottom,
-                                     multiplier:1.0,
-                                     constant: 0.0)
-
-        let left = NSLayoutConstraint(item: tabView,
-                                      attribute: .leading,
-                                      relatedBy: .equal,
-                                      toItem: view,
-                                      attribute: .leading,
-                                      multiplier: 1.0,
-                                      constant: 0.0)
-
-        let right = NSLayoutConstraint(item: view,
-                                       attribute: .trailing,
-                                       relatedBy: .equal,
-                                       toItem: tabView,
-                                       attribute: .trailing,
-                                       multiplier: 1.0,
-                                       constant: 0.0)
-
-        view.addConstraints([top, left, right])
+        tabView.translatesAutoresizingMaskIntoConstraints = false
+        tabBarTopConstraint = tabView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor)
+        NSLayoutConstraint.activate([
+            tabView.heightAnchor.constraint(equalToConstant: option.tabHeight),
+            tabBarTopConstraint!,
+            tabView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tabView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
 
         tabView.pageTabItems = tabItems.map({ $0.title})
         tabView.updateCurrentIndex(beforeIndex, shouldScroll: true)
@@ -185,52 +158,23 @@ extension TabPageViewController {
             self?.displayControllerWithIndex(index, direction: direction, animated: true)
         }
 
-        tabBarTopConstraint = top
-
         return tabView
     }
 
     private func setupStatusView() {
         let statusView = UIView()
         statusView.backgroundColor = option.tabBackgroundColor
-        statusView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(statusView)
 
-        let top = NSLayoutConstraint(item: statusView,
-                                     attribute: .top,
-                                     relatedBy: .equal,
-                                     toItem: view,
-                                     attribute: .top,
-                                     multiplier:1.0,
-                                     constant: 0.0)
+        statusView.translatesAutoresizingMaskIntoConstraints = false
+        statusViewHeightConstraint = statusView.heightAnchor.constraint(equalToConstant: topLayoutGuide.length)
+        NSLayoutConstraint.activate([
+            statusView.topAnchor.constraint(equalTo: view.topAnchor),
+            statusView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            statusView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            statusViewHeightConstraint!
+            ])
 
-        let left = NSLayoutConstraint(item: statusView,
-                                      attribute: .leading,
-                                      relatedBy: .equal,
-                                      toItem: view,
-                                      attribute: .leading,
-                                      multiplier: 1.0,
-                                      constant: 0.0)
-
-        let right = NSLayoutConstraint(item: view,
-                                       attribute: .trailing,
-                                       relatedBy: .equal,
-                                       toItem: statusView,
-                                       attribute: .trailing,
-                                       multiplier: 1.0,
-                                       constant: 0.0)
-
-        let height = NSLayoutConstraint(item: statusView,
-                                        attribute: .height,
-                                        relatedBy: .equal,
-                                        toItem: nil,
-                                        attribute: .height,
-                                        multiplier: 1.0,
-                                        constant: topLayoutGuide.length)
-
-        view.addConstraints([top, left, right, height])
-
-        statusViewHeightConstraint = height
         self.statusView = statusView
     }
 
