@@ -76,7 +76,7 @@
 		F8CE39F81F35AE6500CF74BA /* InfiniteTabPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfiniteTabPageViewController.swift; path = Demo/TabPageViewControllerDemo/InfiniteTabPageViewController.swift; sourceTree = "<group>"; };
 		OBJ_12 /* TabPageViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPageViewControllerTests.swift; sourceTree = "<group>"; };
 		OBJ_14 /* TabPageViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TabPageViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_15 /* TabPageViewControllerTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = TabPageViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_15 /* TabPageViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = TabPageViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_9 /* TabPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -279,6 +279,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -428,7 +429,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.vasily.TabPageViewControllerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -474,7 +475,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.vasily.TabPageViewControllerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -541,6 +542,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.2;
 				TARGET_NAME = TabPageViewControllerTests;
 			};
 			name = Debug;
@@ -558,6 +560,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_VERSION = 4.2;
 				TARGET_NAME = TabPageViewControllerTests;
 			};
 			name = Release;
