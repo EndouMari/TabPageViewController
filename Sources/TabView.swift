@@ -47,11 +47,10 @@ internal class TabView: UIView {
         addSubview(contentView)
         contentView.backgroundColor = option.tabBackgroundColor.withAlphaComponent(option.tabBarAlpha)
         
-        let guide = safeAreaLayoutGuide
-        contentView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
-        contentView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         contentView.translatesAutoresizingMaskIntoConstraints = false
 
         let bundle = Bundle(for: TabView.self)
@@ -68,7 +67,7 @@ internal class TabView: UIView {
             collectionView.addSubview(currentBarView)
             currentBarView.translatesAutoresizingMaskIntoConstraints = false
             
-            currentBarView.topAnchor.constraint(equalTo: guide.topAnchor, constant: option.tabHeight - currentBarViewHeightConstraint.constant).isActive = true
+            currentBarView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: option.tabHeight - currentBarViewHeightConstraint.constant).isActive = true
             currentBarViewLeftConstraint = currentBarView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor)
             currentBarViewLeftConstraint!.isActive = true
             
@@ -94,6 +93,7 @@ extension TabView {
      - parameter contentOffsetX: contentOffset.x of scrollView of isInfinityTabPageViewController
      */
     func scrollCurrentBarView(_ index: Int, contentOffsetX: CGFloat) {
+        
         var nextIndex = isInfinity ? index + pageTabItemsCount : index
         if isInfinity && index == 0 && (beforeIndex - pageTabItemsCount) == pageTabItemsCount - 1 {
             // Calculate the index at the time of transition to the first item from the last item of pageTabItems
