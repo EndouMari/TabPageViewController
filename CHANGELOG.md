@@ -1,3 +1,10 @@
+# 0.2.9 Release notes (2019-10-10)
+
+## Enhancements
+
+Updated Swift Version from 4.2 to 5, and Deployment Target form 10.3 to 11.0.
+Supported Safe Area Guide.
+
 # 0.2.8 Release notes (2018-09-11)
 
 ## Enhancements

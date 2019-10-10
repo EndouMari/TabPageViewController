@@ -46,41 +46,13 @@ internal class TabView: UIView {
         Bundle(for: TabView.self).loadNibNamed("TabView", owner: self, options: nil)
         addSubview(contentView)
         contentView.backgroundColor = option.tabBackgroundColor.withAlphaComponent(option.tabBarAlpha)
-
-        let top = NSLayoutConstraint(item: contentView,
-            attribute: .top,
-            relatedBy: .equal,
-            toItem: self,
-            attribute: .top,
-            multiplier: 1.0,
-            constant: 0.0)
-
-        let left = NSLayoutConstraint(item: contentView,
-            attribute: .leading,
-            relatedBy: .equal,
-            toItem: self,
-            attribute: .leading,
-            multiplier: 1.0,
-            constant: 0.0)
-
-        let bottom = NSLayoutConstraint (item: self,
-            attribute: .bottom,
-            relatedBy: .equal,
-            toItem: contentView,
-            attribute: .bottom,
-            multiplier: 1.0,
-            constant: 0.0)
-
-        let right = NSLayoutConstraint(item: self,
-            attribute: .trailing,
-            relatedBy: .equal,
-            toItem: contentView,
-            attribute: .trailing,
-            multiplier: 1.0,
-            constant: 0.0)
-
+        
+        let guide = safeAreaLayoutGuide
+        contentView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        self.addConstraints([top, left, bottom, right])
 
         let bundle = Bundle(for: TabView.self)
         let nib = UINib(nibName: TabCollectionCell.cellIdentifier(), bundle: bundle)
@@ -95,23 +67,11 @@ internal class TabView: UIView {
             currentBarView.removeFromSuperview()
             collectionView.addSubview(currentBarView)
             currentBarView.translatesAutoresizingMaskIntoConstraints = false
-            let top = NSLayoutConstraint(item: currentBarView,
-                attribute: .top,
-                relatedBy: .equal,
-                toItem: collectionView,
-                attribute: .top,
-                multiplier: 1.0,
-                constant: option.tabHeight - currentBarViewHeightConstraint.constant)
-
-            let left = NSLayoutConstraint(item: currentBarView,
-                attribute: .leading,
-                relatedBy: .equal,
-                toItem: collectionView,
-                attribute: .leading,
-                multiplier: 1.0,
-                constant: 0.0)
-            currentBarViewLeftConstraint = left
-            collectionView.addConstraints([top, left])
+            
+            currentBarView.topAnchor.constraint(equalTo: guide.topAnchor, constant: option.tabHeight - currentBarViewHeightConstraint.constant).isActive = true
+            currentBarViewLeftConstraint = currentBarView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor)
+            currentBarViewLeftConstraint!.isActive = true
+            
         }
 
         bottomBarViewHeightConstraint.constant = 1.0 / UIScreen.main.scale
