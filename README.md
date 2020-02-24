@@ -128,7 +128,7 @@ Copy all the files in `Pod/Classes` directory into your project.
 
 ## Author
 
-EndouMari, endo@vasily.jp
+EndouMari
 
 ## License
 
