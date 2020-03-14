@@ -17,7 +17,7 @@ open class TabPageViewController: UIPageViewController {
         guard let viewController = viewControllers?.first else {
             return nil
         }
-        return tabItems.map{ $0.viewController }.index(of: viewController)
+        return tabItems.map{ $0.viewController }.firstIndex(of: viewController)
     }
     fileprivate var beforeIndex: Int = 0
     fileprivate var tabItemsCount: Int {
@@ -78,9 +78,9 @@ open class TabPageViewController: UIPageViewController {
 
 // MARK: - Public Interface
 
-public extension TabPageViewController {
+extension TabPageViewController {
 
-    public func displayControllerWithIndex(_ index: Int, direction: UIPageViewControllerNavigationDirection, animated: Bool) {
+    public func displayControllerWithIndex(_ index: Int, direction: UIPageViewController.NavigationDirection, animated: Bool) {
 
         beforeIndex = index
         shouldScrollCurrentBar = false
@@ -110,7 +110,7 @@ extension TabPageViewController {
     fileprivate func setupPageViewController() {
         dataSource = self
         delegate = self
-        automaticallyAdjustsScrollViewInsets = false
+        //automaticallyAdjustsScrollViewInsets = false
 
         setViewControllers([tabItems[beforeIndex].viewController],
                            direction: .forward,
@@ -120,7 +120,8 @@ extension TabPageViewController {
 
     fileprivate func setupScrollView() {
         // Disable PageViewController's ScrollView bounce
-        let scrollView = view.subviews.flatMap { $0 as? UIScrollView }.first
+        let scrollView = view.subviews.compactMap { $0 as? UIScrollView }.first
+        scrollView?.contentInsetAdjustmentBehavior = .never
         scrollView?.scrollsToTop = false
         scrollView?.delegate = self
         scrollView?.backgroundColor = option.pageBackgoundColor
@@ -141,51 +142,21 @@ extension TabPageViewController {
     fileprivate func configuredTabView() -> TabView {
         let tabView = TabView(isInfinity: isInfinity, option: option)
         tabView.translatesAutoresizingMaskIntoConstraints = false
-
-        let height = NSLayoutConstraint(item: tabView,
-                                        attribute: .height,
-                                        relatedBy: .equal,
-                                        toItem: nil,
-                                        attribute: .height,
-                                        multiplier: 1.0,
-                                        constant: option.tabHeight)
-        tabView.addConstraint(height)
         view.addSubview(tabView)
-
-        let top = NSLayoutConstraint(item: tabView,
-                                     attribute: .top,
-                                     relatedBy: .equal,
-                                     toItem: topLayoutGuide,
-                                     attribute: .bottom,
-                                     multiplier:1.0,
-                                     constant: 0.0)
-
-        let left = NSLayoutConstraint(item: tabView,
-                                      attribute: .leading,
-                                      relatedBy: .equal,
-                                      toItem: view,
-                                      attribute: .leading,
-                                      multiplier: 1.0,
-                                      constant: 0.0)
-
-        let right = NSLayoutConstraint(item: view,
-                                       attribute: .trailing,
-                                       relatedBy: .equal,
-                                       toItem: tabView,
-                                       attribute: .trailing,
-                                       multiplier: 1.0,
-                                       constant: 0.0)
-
-        view.addConstraints([top, left, right])
+        
+        let guide = view.safeAreaLayoutGuide
+        tabView.heightAnchor.constraint(equalToConstant: option.tabHeight).isActive = true
+        tabBarTopConstraint = tabView.topAnchor.constraint(equalTo: guide.topAnchor)
+        tabBarTopConstraint!.isActive = true
+        tabView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+        tabView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
 
         tabView.pageTabItems = tabItems.map({ $0.title})
         tabView.updateCurrentIndex(beforeIndex, shouldScroll: true)
 
-        tabView.pageItemPressedBlock = { [weak self] (index: Int, direction: UIPageViewControllerNavigationDirection) in
+        tabView.pageItemPressedBlock = { [weak self] (index: Int, direction: UIPageViewController.NavigationDirection) in
             self?.displayControllerWithIndex(index, direction: direction, animated: true)
         }
-
-        tabBarTopConstraint = top
 
         return tabView
     }
@@ -195,42 +166,13 @@ extension TabPageViewController {
         statusView.backgroundColor = option.tabBackgroundColor
         statusView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(statusView)
-
-        let top = NSLayoutConstraint(item: statusView,
-                                     attribute: .top,
-                                     relatedBy: .equal,
-                                     toItem: view,
-                                     attribute: .top,
-                                     multiplier:1.0,
-                                     constant: 0.0)
-
-        let left = NSLayoutConstraint(item: statusView,
-                                      attribute: .leading,
-                                      relatedBy: .equal,
-                                      toItem: view,
-                                      attribute: .leading,
-                                      multiplier: 1.0,
-                                      constant: 0.0)
-
-        let right = NSLayoutConstraint(item: view,
-                                       attribute: .trailing,
-                                       relatedBy: .equal,
-                                       toItem: statusView,
-                                       attribute: .trailing,
-                                       multiplier: 1.0,
-                                       constant: 0.0)
-
-        let height = NSLayoutConstraint(item: statusView,
-                                        attribute: .height,
-                                        relatedBy: .equal,
-                                        toItem: nil,
-                                        attribute: .height,
-                                        multiplier: 1.0,
-                                        constant: topLayoutGuide.length)
-
-        view.addConstraints([top, left, right, height])
-
-        statusViewHeightConstraint = height
+        
+        let guide = view.safeAreaLayoutGuide
+        statusView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        statusView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+        statusView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+        statusViewHeightConstraint = statusView.heightAnchor.constraint(equalToConstant: view.safeAreaInsets.top)
+        statusViewHeightConstraint!.isActive = true
         self.statusView = statusView
     }
 
@@ -260,7 +202,7 @@ extension TabPageViewController {
             setupStatusView()
         }
 
-        statusViewHeightConstraint!.constant = topLayoutGuide.length
+        statusViewHeightConstraint!.constant = view.safeAreaInsets.top
     }
 
     public func showNavigationBar() {
@@ -270,7 +212,7 @@ extension TabPageViewController {
 
         if option.hidesTopViewOnSwipeType != .none {
             tabBarTopConstraint.constant = 0.0
-            UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration)) {
+            UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration)) {
                 self.view.layoutIfNeeded()
             }
         }
@@ -281,9 +223,8 @@ extension TabPageViewController {
 
     private func updateTabBarOrigin(hidden: Bool) {
         guard let tabBarTopConstraint = tabBarTopConstraint else { return }
-
-        tabBarTopConstraint.constant = hidden ? -(20.0 + option.tabHeight) : 0.0
-        UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration)) {
+        tabBarTopConstraint.constant = hidden ? -(UIApplication.shared.statusBarFrame.height + option.tabHeight) : 0.0
+        UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration)) {
             self.view.layoutIfNeeded()
         }
     }
@@ -296,7 +237,7 @@ extension TabPageViewController: UIPageViewControllerDataSource {
 
     fileprivate func nextViewController(_ viewController: UIViewController, isAfter: Bool) -> UIViewController? {
 
-        guard var index = tabItems.map({$0.viewController}).index(of: viewController) else {
+        guard var index = tabItems.map({$0.viewController}).firstIndex(of: viewController) else {
             return nil
         }
 

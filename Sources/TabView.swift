@@ -10,7 +10,7 @@ import UIKit
 
 internal class TabView: UIView {
 
-    var pageItemPressedBlock: ((_ index: Int, _ direction: UIPageViewControllerNavigationDirection) -> Void)?
+    var pageItemPressedBlock: ((_ index: Int, _ direction: UIPageViewController.NavigationDirection) -> Void)?
     var pageTabItems: [String] = [] {
         didSet {
             pageTabItemsCount = pageTabItems.count
@@ -46,46 +46,17 @@ internal class TabView: UIView {
         Bundle(for: TabView.self).loadNibNamed("TabView", owner: self, options: nil)
         addSubview(contentView)
         contentView.backgroundColor = option.tabBackgroundColor.withAlphaComponent(option.tabBarAlpha)
-
-        let top = NSLayoutConstraint(item: contentView,
-            attribute: .top,
-            relatedBy: .equal,
-            toItem: self,
-            attribute: .top,
-            multiplier: 1.0,
-            constant: 0.0)
-
-        let left = NSLayoutConstraint(item: contentView,
-            attribute: .leading,
-            relatedBy: .equal,
-            toItem: self,
-            attribute: .leading,
-            multiplier: 1.0,
-            constant: 0.0)
-
-        let bottom = NSLayoutConstraint (item: self,
-            attribute: .bottom,
-            relatedBy: .equal,
-            toItem: contentView,
-            attribute: .bottom,
-            multiplier: 1.0,
-            constant: 0.0)
-
-        let right = NSLayoutConstraint(item: self,
-            attribute: .trailing,
-            relatedBy: .equal,
-            toItem: contentView,
-            attribute: .trailing,
-            multiplier: 1.0,
-            constant: 0.0)
-
+        
+        contentView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        self.addConstraints([top, left, bottom, right])
 
         let bundle = Bundle(for: TabView.self)
         let nib = UINib(nibName: TabCollectionCell.cellIdentifier(), bundle: bundle)
         collectionView.register(nib, forCellWithReuseIdentifier: TabCollectionCell.cellIdentifier())
-        cellForSize = nib.instantiate(withOwner: nil, options: nil).first as! TabCollectionCell
+        cellForSize = nib.instantiate(withOwner: nil, options: nil).first as? TabCollectionCell
 
         collectionView.scrollsToTop = false
 
@@ -95,23 +66,11 @@ internal class TabView: UIView {
             currentBarView.removeFromSuperview()
             collectionView.addSubview(currentBarView)
             currentBarView.translatesAutoresizingMaskIntoConstraints = false
-            let top = NSLayoutConstraint(item: currentBarView,
-                attribute: .top,
-                relatedBy: .equal,
-                toItem: collectionView,
-                attribute: .top,
-                multiplier: 1.0,
-                constant: option.tabHeight - currentBarViewHeightConstraint.constant)
-
-            let left = NSLayoutConstraint(item: currentBarView,
-                attribute: .leading,
-                relatedBy: .equal,
-                toItem: collectionView,
-                attribute: .leading,
-                multiplier: 1.0,
-                constant: 0.0)
-            currentBarViewLeftConstraint = left
-            collectionView.addConstraints([top, left])
+            
+            currentBarView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: option.tabHeight - currentBarViewHeightConstraint.constant).isActive = true
+            currentBarViewLeftConstraint = currentBarView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor)
+            currentBarViewLeftConstraint!.isActive = true
+            
         }
 
         bottomBarViewHeightConstraint.constant = 1.0 / UIScreen.main.scale
@@ -134,6 +93,7 @@ extension TabView {
      - parameter contentOffsetX: contentOffset.x of scrollView of isInfinityTabPageViewController
      */
     func scrollCurrentBarView(_ index: Int, contentOffsetX: CGFloat) {
+        
         var nextIndex = isInfinity ? index + pageTabItemsCount : index
         if isInfinity && index == 0 && (beforeIndex - pageTabItemsCount) == pageTabItemsCount - 1 {
             // Calculate the index at the time of transition to the first item from the last item of pageTabItems
@@ -161,7 +121,7 @@ extension TabView {
             let distance = (currentCell.frame.width / 2.0) + (nextCell.frame.width / 2.0)
             let scrollRate = contentOffsetX / frame.width
 
-            if fabs(scrollRate) > 0.6 {
+            if abs(scrollRate) > 0.6 {
                 nextCell.highlightTitle()
                 currentCell.unHighlightTitle()
             } else {
@@ -169,7 +129,7 @@ extension TabView {
                 currentCell.highlightTitle()
             }
 
-            let width = fabs(scrollRate) * (nextCell.frame.width - currentCell.frame.width)
+            let width = abs(scrollRate) * (nextCell.frame.width - currentCell.frame.width)
             if isInfinity {
                 let scroll = scrollRate * distance
                 collectionView.contentOffset.x = collectionViewContentOffsetX + scroll
@@ -277,7 +237,7 @@ extension TabView {
     fileprivate func deselectVisibleCells() {
         collectionView
             .visibleCells
-            .flatMap { $0 as? TabCollectionCell }
+            .compactMap { $0 as? TabCollectionCell }
             .forEach { $0.isCurrent = false }
     }
 }
@@ -303,7 +263,7 @@ extension TabView: UICollectionViewDataSource {
         cell.option = option
         cell.isCurrent = fixedIndex == (currentIndex % pageTabItemsCount)
         cell.tabItemButtonPressedBlock = { [weak self, weak cell] in
-            var direction: UIPageViewControllerNavigationDirection = .forward
+            var direction: UIPageViewController.NavigationDirection = .forward
             if let pageTabItemsCount = self?.pageTabItemsCount, let currentIndex = self?.currentIndex {
                 if self?.isInfinity == true {
                     if (indexPath.item < pageTabItemsCount) || (indexPath.item < currentIndex) {

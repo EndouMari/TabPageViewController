@@ -10,17 +10,14 @@ import UIKit
 import TabPageViewController
 
 class ListViewController: UITableViewController {
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        let navigationHeight = topLayoutGuide.length 
-        tableView.contentInset.top = navigationHeight + TabPageOption().tabHeight
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.contentInset.top = TabPageOption().tabHeight
     }
 
     fileprivate func updateNavigationBarOrigin(velocity: CGPoint) {
         guard let tabPageViewController = parent as? TabPageViewController else { return }
-
         if velocity.y > 0.5 {
             tabPageViewController.updateNavigationBarHidden(true, animated: true)
         } else if velocity.y < -0.5 {
