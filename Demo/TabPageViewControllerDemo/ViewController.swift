@@ -19,5 +19,8 @@ class ViewController: UIViewController {
     @IBAction func InfinityButton(_ button: UIButton) {
         let tc = InfiniteTabPageViewController()
         navigationController?.pushViewController(tc, animated: true)
+
+        // Change tab title
+        tc.setTabItemTitle("Mon.(*)", at: 0)
     }
 }

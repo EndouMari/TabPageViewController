@@ -27,7 +27,7 @@ open class TabPageViewController: UIPageViewController {
         return self.view.bounds.width
     }
     fileprivate var shouldScrollCurrentBar: Bool = true
-    lazy fileprivate var tabView: TabView = self.configuredTabView()
+    lazy open var tabView: TabView = self.configuredTabView()
     fileprivate var statusView: UIView?
     fileprivate var statusViewHeightConstraint: NSLayoutConstraint?
     fileprivate var tabBarTopConstraint: NSLayoutConstraint?
@@ -288,6 +288,16 @@ extension TabPageViewController: UIPageViewControllerDataSource {
 
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         return nextViewController(viewController, isAfter: false)
+    }
+
+    public func setTabItemTitle(_ title: String, at: Int) {
+        guard 0..<tabItems.count ~= at else {
+            print("Specified `at` argument was out of range")
+            return
+        }
+
+        tabItems[at].title = title
+        tabView.pageTabItems[at] = tabItems[at].title
     }
 }
 
